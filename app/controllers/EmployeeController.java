@@ -5,25 +5,50 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.Employee;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import play.data.*;
 import play.libs.Json;
-import play.mvc.Controller;
-import play.mvc.Http;
-import play.mvc.Result;
+import play.libs.concurrent.HttpExecution;
+import play.libs.concurrent.HttpExecutionContext;
+import play.mvc.*;
+import services.DatabaseExecutionContext;
 import services.EmployeeService;
 import utils.ApplicationUtil;
 
-import java.util.List;
+import javax.inject.Inject;
+import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
+import java.util.concurrent.Executor;
 
 public class EmployeeController extends Controller {
 
     private static final Logger logger = LoggerFactory.getLogger("controller");
-    private final EmployeeService employeeService;
+    private final FormFactory formFactory;
+    private final EmployeeService edb;
+    private final HttpExecutionContext hec;
+    private final DatabaseExecutionContext dec;
 
-    public EmployeeController(EmployeeService employeeService) {
-        this.employeeService = employeeService;
+    @Inject
+    public EmployeeController(FormFactory formFactory, EmployeeService employeeDBService, HttpExecutionContext hec, DatabaseExecutionContext dec){
+        this.formFactory=formFactory;
+        this.edb=employeeDBService;
+        this.hec=hec;
+        this.dec=dec;
     }
 
+    public CompletionStage<Result> retrieve(int id) {
+
+        Executor myEc = HttpExecution.fromThread(dec);
+        logger.debug("In EmployeeController.retrieve(), retrieve employee with id: {}",id);
+
+        return edb.getEmployee(id).thenApplyAsync(employee ->
+                {
+                    return ok(ApplicationUtil.createResponse(Json.toJson(employee), true));
+                }
+                , hec.current());
+    }
+
+    /*
     public Result create(Http.Request request) {
         JsonNode json = request.body().asJson();
         if (json == null) {
@@ -110,5 +135,5 @@ public class EmployeeController extends Controller {
                 return notFound(ApplicationUtil.createResponse("Employee with id:" + id + " not found", false));
             }
         });
-    }
+    }*/
 }

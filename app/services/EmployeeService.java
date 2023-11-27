@@ -21,7 +21,33 @@ public class EmployeeService {
         this.dec = dec;
     }
 
+
     public CompletionStage<Employee> getEmployee(int id) {
+        return CompletableFuture.supplyAsync(
+                () -> {
+                    return db.withConnection(
+                            connection -> {
+                                ResultSet rS = connection.createStatement().executeQuery(
+                                        "SELECT id, name, department, salary FROM employee WHERE id="+id+";");
+
+                                Employee newEmployee = new Employee();
+                                while (rS.next()){
+                                    newEmployee.setId(rS.getInt("id"));
+                                    newEmployee.setName(rS.getString("name"));
+                                    newEmployee.setDepartment(rS.getString("department"));
+                                    newEmployee.setSalary(rS.getInt("salary"));
+                                }
+                                return newEmployee;
+                            });
+                },
+                dec);
+    }
+    
+
+/*
+
+
+public CompletionStage<Employee> getEmployee(int id) {
         return CompletableFuture.supplyAsync(() -> {
             Employee employee = null;
 
@@ -132,5 +158,5 @@ public class EmployeeService {
 
             return employees;
         }, dec);
-    }
+    }*/
 }
