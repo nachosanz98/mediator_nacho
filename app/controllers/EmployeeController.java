@@ -1,21 +1,21 @@
 package controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.Employee;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import play.data.*;
+import play.data.FormFactory;
 import play.libs.Json;
 import play.libs.concurrent.HttpExecution;
 import play.libs.concurrent.HttpExecutionContext;
-import play.mvc.*;
+import play.mvc.Controller;
+import play.mvc.Http;
+import play.mvc.Result;
 import services.DatabaseExecutionContext;
 import services.EmployeeService;
 import utils.ApplicationUtil;
 
 import javax.inject.Inject;
-import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.Executor;
@@ -48,26 +48,26 @@ public class EmployeeController extends Controller {
                 , hec.current());
     }
 
-    /*
-    public Result create(Http.Request request) {
+    public CompletionStage<Result> create(Http.Request request) {
         JsonNode json = request.body().asJson();
-        if (json == null) {
-            return badRequest(ApplicationUtil.createResponse("Expecting JSON data", false));
-        }
-        Employee employee = Json.fromJson(json, Employee.class);
-        logger.debug("In EmployeeController.create(), input is: {}", json.toString());
-        CompletionStage<Boolean> createdEmployee = employeeService.addEmployee(employee);
 
-        return (Result)createdEmployee.thenApplyAsync(result -> {
+        if (json == null) {
+            return CompletableFuture.completedFuture(
+                    badRequest(ApplicationUtil.createResponse("Expecting JSON data", false))
+            );
+        }
+
+        Employee employee = Json.fromJson(json, Employee.class);
+        return edb.addEmployee(employee).thenApplyAsync(result -> {
             if (result) {
-                JsonNode jsonObject = Json.toJson(employee);
-                return created(ApplicationUtil.createResponse(jsonObject, true));
+                return created(ApplicationUtil.createResponse(Json.toJson(employee), true));
             } else {
-                return internalServerError("An error occurred");
+                return internalServerError(ApplicationUtil.createResponse("Error creating employee", false));
             }
-        });
+        }, hec.current());
     }
 
+    /*
     public Result update(Http.Request request) {
         logger.debug("In EmployeeController.update()");
         JsonNode json = request.body().asJson();

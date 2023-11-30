@@ -45,6 +45,7 @@ class Routes(
   def documentation = List(
     ("""GET""", this.prefix, """controllers.HomeController.index()"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """employee/""" + "$" + """id<[^/]+>""", """controllers.EmployeeController.retrieve(id:Int)"""),
+    ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """employee""", """controllers.EmployeeController.create(request:Request)"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """assets/""" + "$" + """file<.+>""", """controllers.Assets.versioned(path:String = "/public", file:Asset)"""),
     Nil
   ).foldLeft(List.empty[(String,String,String)]) { (s,e) => e.asInstanceOf[Any] match {
@@ -90,11 +91,31 @@ GET     /employee              controllers.EmployeeController.listEmployees()"""
     )
   )
 
+  // @LINE:11
+  private[this] lazy val controllers_EmployeeController_create2_route = Route("POST",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("employee")))
+  )
+  private[this] lazy val controllers_EmployeeController_create2_invoker = createInvoker(
+    
+    (req:play.mvc.Http.Request) =>
+      EmployeeController_1.create(fakeValue[play.mvc.Http.Request]),
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.EmployeeController",
+      "create",
+      Seq(classOf[play.mvc.Http.Request]),
+      "POST",
+      this.prefix + """employee""",
+      """""",
+      Seq()
+    )
+  )
+
   // @LINE:16
-  private[this] lazy val controllers_Assets_versioned2_route = Route("GET",
+  private[this] lazy val controllers_Assets_versioned3_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("assets/"), DynamicPart("file", """.+""",false)))
   )
-  private[this] lazy val controllers_Assets_versioned2_invoker = createInvoker(
+  private[this] lazy val controllers_Assets_versioned3_invoker = createInvoker(
     Assets_2.versioned(fakeValue[String], fakeValue[Asset]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
@@ -123,10 +144,17 @@ GET     /employee              controllers.EmployeeController.listEmployees()"""
         controllers_EmployeeController_retrieve1_invoker.call(EmployeeController_1.retrieve(id))
       }
   
+    // @LINE:11
+    case controllers_EmployeeController_create2_route(params@_) =>
+      call { 
+        controllers_EmployeeController_create2_invoker.call(
+          req => EmployeeController_1.create(req))
+      }
+  
     // @LINE:16
-    case controllers_Assets_versioned2_route(params@_) =>
+    case controllers_Assets_versioned3_route(params@_) =>
       call(Param[String]("path", Right("/public")), params.fromPath[Asset]("file", None)) { (path, file) =>
-        controllers_Assets_versioned2_invoker.call(Assets_2.versioned(path, file))
+        controllers_Assets_versioned3_invoker.call(Assets_2.versioned(path, file))
       }
   }
 }

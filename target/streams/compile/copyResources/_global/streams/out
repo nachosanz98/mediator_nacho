@@ -1,4 +1,4 @@
 [0m[[0m[0mdebug[0m] [0m[0mCopy resource mappings: [0m
-[0m[[0m[0mdebug[0m] [0m[0m	(/Users/ssaugar/temp/mediator_nacho/conf/logback.xml,/Users/ssaugar/temp/mediator_nacho/target/scala-2.13/classes/logback.xml)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	(/Users/ssaugar/temp/mediator_nacho/conf/application.conf,/Users/ssaugar/temp/mediator_nacho/target/scala-2.13/classes/application.conf)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	(/Users/ssaugar/temp/mediator_nacho/conf/routes,/Users/ssaugar/temp/mediator_nacho/target/scala-2.13/classes/routes)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	(C:\Users\nache\Desktop\Proyectos 3\play-java-starter-example\mediator\conf\application.conf,C:\Users\nache\Desktop\Proyectos 3\play-java-starter-example\mediator\target\scala-2.13\classes\application.conf)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	(C:\Users\nache\Desktop\Proyectos 3\play-java-starter-example\mediator\conf\logback.xml,C:\Users\nache\Desktop\Proyectos 3\play-java-starter-example\mediator\target\scala-2.13\classes\logback.xml)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	(C:\Users\nache\Desktop\Proyectos 3\play-java-starter-example\mediator\conf\routes,C:\Users\nache\Desktop\Proyectos 3\play-java-starter-example\mediator\target\scala-2.13\classes\routes)[0m

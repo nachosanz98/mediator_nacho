@@ -48,6 +48,16 @@ package controllers.javascript {
       """
     )
   
+    // @LINE:11
+    def create: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.EmployeeController.create",
+      """
+        function() {
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "employee"})
+        }
+      """
+    )
+  
   }
 
   // @LINE:16

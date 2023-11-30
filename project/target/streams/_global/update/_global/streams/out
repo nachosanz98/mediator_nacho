@@ -1,3 +1,3 @@
-[0m[[0m[0mdebug[0m] [0m[0mnot up to date. inChanged = true, force = false[0m
-[0m[[0m[0mdebug[0m] [0m[0mUpdating ProjectRef(uri("file:/Users/ssaugar/temp/mediator_nacho/project/"), "mediator_nacho-build")...[0m
-[0m[[0m[0mdebug[0m] [0m[0mDone updating ProjectRef(uri("file:/Users/ssaugar/temp/mediator_nacho/project/"), "mediator_nacho-build")[0m
+[debug] not up to date. inChanged = true, force = false
+[debug] Updating ProjectRef(uri("file:/C:/Users/nache/Desktop/Proyectos%203/play-java-starter-example/mediator/project/"), "mediator-build")...
+[debug] Done updating ProjectRef(uri("file:/C:/Users/nache/Desktop/Proyectos%203/play-java-starter-example/mediator/project/"), "mediator-build")

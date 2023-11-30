@@ -5,9 +5,8 @@ import play.db.Database;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
@@ -44,62 +43,28 @@ public class EmployeeService {
     }
     
 
-/*
-
-
-public CompletionStage<Employee> getEmployee(int id) {
-        return CompletableFuture.supplyAsync(() -> {
-            Employee employee = null;
-
-            try (Connection connection = db.getConnection()) {
-                PreparedStatement statement = connection.prepareStatement("SELECT * FROM employees WHERE id = ?");
-                statement.setInt(1, id);
-
-                ResultSet resultSet = statement.executeQuery();
-
-                if (resultSet.next()) {
-                    employee = new Employee(
-                            resultSet.getInt("id"),
-                            resultSet.getString("name"),
-                            resultSet.getString("department"),
-                            resultSet.getInt("salary")
-                    );
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-                // Manejo de errores
-            }
-
-            return employee;
-        }, dec);
-    }
 
 
     public CompletionStage<Boolean> addEmployee(Employee employee) {
-        return CompletableFuture.supplyAsync(() -> {
-            try (Connection connection = db.getConnection()) {
-                PreparedStatement statement = connection.prepareStatement(
-                        "INSERT INTO employees (name, department, salary) VALUES (?, ?, ?)",
-                        Statement.RETURN_GENERATED_KEYS);
+        return CompletableFuture.supplyAsync(
+                () -> {
+                    return db.withConnection(
+                            connection -> {
+                                String sql_string = "INSERT INTO employees (name, department, salary) VALUES (?, ?, ?)";
+                                PreparedStatement statement = connection.prepareStatement(sql_string);
 
-                statement.setString(1, employee.getName());
-                statement.setString(2, employee.getDepartment());
-                statement.setInt(3, employee.getSalary());
+                                statement.setString(1, employee.getName());
+                                statement.setString(2, employee.getDepartment());
+                                statement.setInt(3, employee.getSalary());
 
-                int rowsInserted = statement.executeUpdate();
-                ResultSet generatedKeys = statement.getGeneratedKeys();
+                                int rowsInserted = statement.executeUpdate();
 
-                if (rowsInserted > 0 && generatedKeys.next()) {
-                    employee.setId(generatedKeys.getInt(1));
-                    return true;
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            return false;
+                                return rowsInserted > 0;
+            });
         }, dec);
     }
 
+    /*
     public CompletableFuture<Boolean> deleteEmployee(int id) {
         return CompletableFuture.supplyAsync(() -> {
             try (Connection connection = db.getConnection()) {

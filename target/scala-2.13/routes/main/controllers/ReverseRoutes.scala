@@ -38,6 +38,12 @@ package controllers {
       Call("GET", _prefix + { _defaultPrefix } + "employee/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Int]].unbind("id", id)))
     }
   
+    // @LINE:11
+    def create(): Call = {
+      
+      Call("POST", _prefix + { _defaultPrefix } + "employee")
+    }
+  
   }
 
   // @LINE:16
