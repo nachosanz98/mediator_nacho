@@ -6,9 +6,9 @@
 GET     /                           controllers.HomeController.index()
 
 # APIs in EmployeeController
-#GET     /employee              controllers.EmployeeController.listEmployees()
-GET     /employee/:id          controllers.EmployeeController.retrieve(id:Int)
-POST    /employee              controllers.EmployeeController.create(request:Request)
+#GET    /employee/list          controllers.EmployeeController.listEmployees()
+GET     /employee/:id           controllers.EmployeeController.retrieve(id:Int)
+POST    /employee/add           controllers.EmployeeController.create(request:Request)
 #PUT     /employee              controllers.EmployeeController.update(request:Request)
 #DELETE  /employee/:id          controllers.EmployeeController.delete(id:Int)
 

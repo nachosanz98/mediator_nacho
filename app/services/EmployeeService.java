@@ -27,14 +27,14 @@ public class EmployeeService {
                     return db.withConnection(
                             connection -> {
                                 ResultSet rS = connection.createStatement().executeQuery(
-                                        "SELECT id, name, department, salary FROM employee WHERE id="+id+";");
+                                        "SELECT id, nombre, departmento, salario FROM empleado WHERE id="+id+";");
 
                                 Employee newEmployee = new Employee();
                                 while (rS.next()){
                                     newEmployee.setId(rS.getInt("id"));
-                                    newEmployee.setName(rS.getString("name"));
-                                    newEmployee.setDepartment(rS.getString("department"));
-                                    newEmployee.setSalary(rS.getInt("salary"));
+                                    newEmployee.setName(rS.getString("nombre"));
+                                    newEmployee.setDepartment(rS.getString("departmento"));
+                                    newEmployee.setSalary(rS.getInt("salario"));
                                 }
                                 return newEmployee;
                             });
@@ -44,13 +44,12 @@ public class EmployeeService {
     
 
 
-
     public CompletionStage<Boolean> addEmployee(Employee employee) {
         return CompletableFuture.supplyAsync(
                 () -> {
                     return db.withConnection(
                             connection -> {
-                                String sql_string = "INSERT INTO employees (name, department, salary) VALUES (?, ?, ?)";
+                                String sql_string = "INSERT INTO empleado (nombre, departmento, salario) VALUES (?, ?, ?)";
                                 PreparedStatement statement = connection.prepareStatement(sql_string);
 
                                 statement.setString(1, employee.getName());
@@ -68,7 +67,7 @@ public class EmployeeService {
     public CompletableFuture<Boolean> deleteEmployee(int id) {
         return CompletableFuture.supplyAsync(() -> {
             try (Connection connection = db.getConnection()) {
-                PreparedStatement statement = connection.prepareStatement("DELETE FROM employees WHERE id = ?");
+                PreparedStatement statement = connection.prepareStatement("DELETE FROM empleado WHERE id = ?");
                 statement.setInt(1, id);
 
                 int rowsDeleted = statement.executeUpdate();
