@@ -7,6 +7,8 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
@@ -27,19 +29,18 @@ public class EmployeeService {
                     return db.withConnection(
                             connection -> {
                                 ResultSet rS = connection.createStatement().executeQuery(
-                                        "SELECT id, nombre, departmento, salario FROM empleado WHERE id="+id+";");
+                                        "SELECT id, nombre, departamento, salario FROM empleado WHERE id="+id+";");
 
                                 Employee newEmployee = new Employee();
                                 while (rS.next()){
                                     newEmployee.setId(rS.getInt("id"));
                                     newEmployee.setName(rS.getString("nombre"));
-                                    newEmployee.setDepartment(rS.getString("departmento"));
+                                    newEmployee.setDepartment(rS.getString("departamento"));
                                     newEmployee.setSalary(rS.getInt("salario"));
                                 }
                                 return newEmployee;
                             });
-                },
-                dec);
+                }, dec);
     }
     
 
@@ -49,7 +50,7 @@ public class EmployeeService {
                 () -> {
                     return db.withConnection(
                             connection -> {
-                                String sql_string = "INSERT INTO empleado (nombre, departmento, salario) VALUES (?, ?, ?)";
+                                String sql_string = "INSERT INTO empleado (nombre, departamento, salario) VALUES (?, ?, ?)";
                                 PreparedStatement statement = connection.prepareStatement(sql_string);
 
                                 statement.setString(1, employee.getName());
@@ -63,64 +64,57 @@ public class EmployeeService {
         }, dec);
     }
 
-    /*
-    public CompletableFuture<Boolean> deleteEmployee(int id) {
-        return CompletableFuture.supplyAsync(() -> {
-            try (Connection connection = db.getConnection()) {
-                PreparedStatement statement = connection.prepareStatement("DELETE FROM empleado WHERE id = ?");
-                statement.setInt(1, id);
 
-                int rowsDeleted = statement.executeUpdate();
-                return rowsDeleted > 0;
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            return false;
-        }, dec);
-    }
+    public CompletionStage<Boolean> deleteEmployee(int id) {
+        return CompletableFuture.supplyAsync(
+                () -> {
+                    return db.withConnection(
+                            connection -> {
+                                String sql_string = "DELETE FROM empleado WHERE id = ?";
+                                PreparedStatement statement = connection.prepareStatement(sql_string);
 
-    public CompletionStage<Boolean> updateEmployee(Employee employee) {
-        return CompletableFuture.supplyAsync(() -> {
-            try (Connection connection = db.getConnection()) {
-                PreparedStatement statement = connection.prepareStatement(
-                        "UPDATE employees SET name = ?, department = ?, salary = ? WHERE id = ?");
+                                statement.setInt(1, id);
 
-                statement.setString(1, employee.getName());
-                statement.setString(2, employee.getDepartment());
-                statement.setInt(3, employee.getSalary());
-                statement.setInt(4, employee.getId());
+                                int rowsDeleted = statement.executeUpdate();
 
-                int rowsUpdated = statement.executeUpdate();
-                return rowsUpdated > 0;
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            return false;
-        }, dec);
+                                return rowsDeleted > 0;
+                            }
+                    );
+                }, dec);
     }
 
     public CompletionStage<List<Employee>> getAllEmployees() {
-        return CompletableFuture.supplyAsync(() -> {
-            List<Employee> employees = new ArrayList<>();
+        return CompletableFuture.supplyAsync(() ->
+                        db.withConnection(connection -> {
+                            List<Employee> employees = new ArrayList<>();
+                            ResultSet rs = connection.createStatement().executeQuery("SELECT id, nombre, departamento, salario FROM empleado");
+                            while (rs.next()) {
+                                Employee employee = new Employee();
+                                employee.setId(rs.getInt("id"));
+                                employee.setName(rs.getString("nombre"));
+                                employee.setDepartment(rs.getString("departamento"));
+                                employee.setSalary(rs.getInt("salario"));
+                                employees.add(employee);
+                            }
+                            return employees;
+                        })
+                , dec);
+    }
 
-            try (Connection connection = db.getConnection()) {
-                PreparedStatement statement = connection.prepareStatement("SELECT * FROM employees");
-                ResultSet resultSet = statement.executeQuery();
+    public CompletionStage<Boolean> updateEmployee(Employee employee) {
+        return CompletableFuture.supplyAsync(() ->
+                        db.withConnection(connection -> {
+                            String sqlString = "UPDATE empleado SET nombre = ?, departamento = ?, salario = ? WHERE id = ?";
+                            PreparedStatement statement = connection.prepareStatement(sqlString);
 
-                while (resultSet.next()) {
-                    Employee employee = new Employee(
-                            resultSet.getInt("id"),
-                            resultSet.getString("name"),
-                            resultSet.getString("department"),
-                            resultSet.getInt("salary")
-                    );
-                    employees.add(employee);
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+                            statement.setString(1, employee.getName());
+                            statement.setString(2, employee.getDepartment());
+                            statement.setInt(3, employee.getSalary());
+                            statement.setInt(4, employee.getId());
 
-            return employees;
-        }, dec);
-    }*/
+                            int rowsUpdated = statement.executeUpdate();
+                            return rowsUpdated > 0;
+                        })
+                , dec);
+    }
 }

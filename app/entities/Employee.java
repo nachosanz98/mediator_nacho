@@ -4,22 +4,22 @@ package entities;
 public class Employee {
 
 	private int id;
-    private String name;
-    private String department;
-    private int salary;
+    private String nombre;
+    private String departamento;
+    private int salario;
 
     public Employee(){
         this.id=0;
-        this.name="";
-        this.department="";
-        this.salary=0;
+        this.nombre ="";
+        this.departamento ="";
+        this.salario =0;
     }
 
-    public Employee(int id, String name, String department, int salary) {
+    public Employee(int id, String nombre, String departamento, int salario) {
         this.id = id;
-        this.name = name;
-        this.department = department;
-        this.salary = salary;
+        this.nombre = nombre;
+        this.departamento = departamento;
+        this.salario = salario;
     }
 
     public int getId() {
@@ -31,36 +31,36 @@ public class Employee {
     }
 
     public String getName() {
-        return name;
+        return nombre;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.nombre = name;
     }
 
     public String getDepartment() {
-        return department;
+        return departamento;
     }
 
-    public void setDepartment(String department) {
-        this.department = department;
+    public void setDepartment(String departamento) {
+        this.departamento = departamento;
     }
 
     public int getSalary() {
-        return salary;
+        return salario;
     }
 
-    public void setSalary(int salary) {
-        this.salary = salary;
+    public void setSalary(int salario) {
+        this.salario = salario;
     }
 
     @Override
     public String toString() {
         return "Employee{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", department='" + department + '\'' +
-                ", salary=" + salary +
+                ", nombre='" + nombre + '\'' +
+                ", departamento='" + departamento + '\'' +
+                ", salario=" + salario +
                 '}';
     }
 }
