@@ -2,6 +2,9 @@ package controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import entities.Msms;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import play.data.FormFactory;
 import play.libs.Json;
 import play.libs.concurrent.HttpExecution;
 import play.libs.concurrent.HttpExecutionContext;
@@ -21,12 +24,15 @@ import java.util.concurrent.Executor;
 
 public class MsmsController extends Controller {
 
+    private static final Logger logger = LoggerFactory.getLogger("controller");
+    private final FormFactory formFactory;
     private final MsmsService msmsService;
     private final HttpExecutionContext hec;
     private final DatabaseExecutionContext dec;
 
     @Inject
-    public MsmsController(MsmsService msmsService, HttpExecutionContext hec, DatabaseExecutionContext dec) {
+    public MsmsController(FormFactory formFactory, MsmsService msmsService, HttpExecutionContext hec, DatabaseExecutionContext dec) {
+        this.formFactory = formFactory;
         this.msmsService = msmsService;
         this.hec = hec;
         this.dec = dec;
@@ -34,13 +40,14 @@ public class MsmsController extends Controller {
 
     public CompletionStage<Result> retrieve(int id) {
         Executor myEc = HttpExecution.fromThread(dec);
+        logger.debug("In MsmsController.retrieve(), retrieve pathway with id: {}", id);
         return msmsService.getMsms(id).thenApplyAsync(msms -> {
             if (msms != null) {
                 return ok(ApplicationUtil.createResponse(Json.toJson(msms), true));
             } else {
                 return notFound(ApplicationUtil.createResponse("Msms not found", false));
             }
-        }, myEc);
+        }, hec.current());
     }
 
     public CompletionStage<Result> create(Http.Request request) {
@@ -63,13 +70,16 @@ public class MsmsController extends Controller {
     }
 
     public CompletionStage<Result> listMsms() {
+        logger.debug("Fetching all msms...");
         return msmsService.getAllMsms().thenApplyAsync(msmsList -> {
             JsonNode jsonData = Json.toJson(msmsList);
+            logger.debug("Retrieved msms: {}", msmsList.toString());
             return ok(ApplicationUtil.createResponse(jsonData, true));
         }, hec.current());
     }
 
     public CompletionStage<Result> delete(int id) {
+        logger.debug("In MsmsController.retrieve(), delete pathway with id: {}", id);
         return msmsService.deleteMsms(id).thenApplyAsync(result -> {
             if (result) {
                 return ok(ApplicationUtil.createResponse("Msms with id: " + id + " deleted", true));
@@ -99,8 +109,10 @@ public class MsmsController extends Controller {
     }
 
     public CompletionStage<Result> listMsmsInRange(int startId, int endId) {
+        logger.debug("Fetching msms in range from {} to {}...", startId, endId);
         return msmsService.getMsmsInRange(startId, endId).thenApplyAsync(msmsList -> {
             JsonNode jsonData = Json.toJson(msmsList);
+            logger.debug("Retrieved msms in range: {}", msmsList.toString());
             return ok(ApplicationUtil.createResponse(jsonData, true));
         }, hec.current());
     }
