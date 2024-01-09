@@ -48,5 +48,14 @@ PUT     /ceEffMob/                    controllers.CeEffMobController.update(requ
 DELETE  /ceEffMob/:id                 controllers.CeEffMobController.delete(id: Int)
 PATCH   /ceEffMob/:id                 controllers.CeEffMobController.patchCeEffMob(request: Request, id: Int)
 
+# APIs in ChainsController
+GET     /chains                         controllers.ChainsController.listChains()
+GET     /chains/:startId-:endId         controllers.ChainsController.listChainsInRange(startId: Int, endId: Int)
+GET     /chains/:id                     controllers.ChainsController.retrieve(id: Int)
+POST    /chains                         controllers.ChainsController.create(request: Request)
+PUT     /chains/                        controllers.ChainsController.update(request: Request)
+DELETE  /chains/:id                     controllers.ChainsController.delete(id: Int)
+PATCH   /chains/:id                     controllers.ChainsController.patchChains(request: Request, id: Int)
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
