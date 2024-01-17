@@ -89,7 +89,7 @@ public class PathwayService {
                 }), dec);
     }
 
-    public CompletionStage<Boolean> updatePathway(Pathway pathway) {
+    public CompletionStage<Boolean> updatePathway(Pathway pathway, int id) {
         return CompletableFuture.supplyAsync(() ->
                 db.withConnection(connection -> {
                     PreparedStatement statement = connection.prepareStatement(
@@ -100,7 +100,7 @@ public class PathwayService {
                     statement.setString(2, pathway.getPathwayName());
                     statement.setString(3, pathway.getCreated());
                     statement.setString(4, pathway.getLastUpdated());
-                    statement.setInt(5, pathway.getPathwayId());
+                    statement.setInt(5, id);
 
                     int rowsUpdated = statement.executeUpdate();
                     return rowsUpdated > 0;

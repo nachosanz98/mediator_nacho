@@ -84,7 +84,7 @@ public class CeEffMobController extends Controller {
         }, hec.current());
     }
 
-    public CompletionStage<Result> update(Http.Request request) {
+    public CompletionStage<Result> update(Http.Request request, int id) {
         JsonNode json = request.body().asJson();
 
         if (json == null) {
@@ -94,7 +94,7 @@ public class CeEffMobController extends Controller {
         }
 
         CeEffMob ceEffMob = Json.fromJson(json, CeEffMob.class);
-        return cems.updateCeEffMob(ceEffMob).thenApplyAsync(result -> {
+        return cems.updateCeEffMob(ceEffMob, id).thenApplyAsync(result -> {
             if (result) {
                 return ok(ApplicationUtil.createResponse(Json.toJson(ceEffMob), true));
             } else {
@@ -156,7 +156,7 @@ public class CeEffMobController extends Controller {
                 }
             }
 
-            return cems.updateCeEffMob(existingCeEffMob).thenApplyAsync(result -> {
+            return cems.updateCeEffMob(existingCeEffMob, existingCeEffMob.getCeEffMobId()).thenApplyAsync(result -> {
                 if (result) {
                     return ok(ApplicationUtil.createResponse(Json.toJson(existingCeEffMob), true));
                 } else {

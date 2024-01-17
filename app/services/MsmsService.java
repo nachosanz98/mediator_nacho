@@ -109,7 +109,7 @@ public class MsmsService {
                 }), dec);
     }
 
-    public CompletionStage<Boolean> updateMsms(Msms msms) {
+    public CompletionStage<Boolean> updateMsms(Msms msms, int id) {
         return CompletableFuture.supplyAsync(() ->
                 db.withConnection(connection -> {
                     PreparedStatement statement = connection.prepareStatement(
@@ -127,7 +127,7 @@ public class MsmsService {
                     statement.setInt(8, msms.getPredicted());
                     statement.setString(9, msms.getCreated());
                     statement.setString(10, msms.getLastUpdated());
-                    statement.setInt(11, msms.getMsmsId());
+                    statement.setInt(11, id);
 
                     int rowsUpdated = statement.executeUpdate();
                     return rowsUpdated > 0;

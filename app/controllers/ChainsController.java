@@ -84,7 +84,7 @@ public class ChainsController extends Controller {
         }, hec.current());
     }
 
-    public CompletionStage<Result> update(Http.Request request) {
+    public CompletionStage<Result> update(Http.Request request, int id) {
         JsonNode json = request.body().asJson();
 
         if (json == null) {
@@ -94,7 +94,7 @@ public class ChainsController extends Controller {
         }
 
         Chains chains = Json.fromJson(json, Chains.class);
-        return chs.updateChains(chains).thenApplyAsync(result -> {
+        return chs.updateChains(chains, id).thenApplyAsync(result -> {
             if (result) {
                 return ok(ApplicationUtil.createResponse(Json.toJson(chains), true));
             } else {
@@ -159,7 +159,7 @@ public class ChainsController extends Controller {
                 }
             }
 
-            return chs.updateChains(existingChains).thenApplyAsync(result -> {
+            return chs.updateChains(existingChains, existingChains.getChainsId()).thenApplyAsync(result -> {
                 if (result) {
                     return ok(ApplicationUtil.createResponse(Json.toJson(existingChains), true));
                 } else {

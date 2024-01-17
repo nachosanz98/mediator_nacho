@@ -89,7 +89,7 @@ public class MsmsController extends Controller {
         }, hec.current());
     }
 
-    public CompletionStage<Result> update(Http.Request request) {
+    public CompletionStage<Result> update(Http.Request request, int id) {
         JsonNode json = request.body().asJson();
 
         if (json == null) {
@@ -99,7 +99,7 @@ public class MsmsController extends Controller {
         }
 
         Msms msms = Json.fromJson(json, Msms.class);
-        return msmsService.updateMsms(msms).thenApplyAsync(result -> {
+        return msmsService.updateMsms(msms, id).thenApplyAsync(result -> {
             if (result) {
                 return ok(ApplicationUtil.createResponse(Json.toJson(msms), true));
             } else {
@@ -173,7 +173,7 @@ public class MsmsController extends Controller {
                 }
             }
 
-            return msmsService.updateMsms(existingMsms).thenApplyAsync(result -> {
+            return msmsService.updateMsms(existingMsms, existingMsms.getMsmsId()).thenApplyAsync(result -> {
                 if (result) {
                     return ok(ApplicationUtil.createResponse(Json.toJson(existingMsms), true));
                 } else {

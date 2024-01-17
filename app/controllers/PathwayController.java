@@ -86,7 +86,7 @@ public class PathwayController extends Controller {
         }, hec.current());
     }
 
-    public CompletionStage<Result> update(Http.Request request) {
+    public CompletionStage<Result> update(Http.Request request, int id) {
         JsonNode json = request.body().asJson();
 
         if (json == null) {
@@ -96,7 +96,7 @@ public class PathwayController extends Controller {
         }
 
         Pathway pathway = Json.fromJson(json, Pathway.class);
-        return pathwayService.updatePathway(pathway).thenApplyAsync(result -> {
+        return pathwayService.updatePathway(pathway, id).thenApplyAsync(result -> {
             if (result) {
                 return ok(ApplicationUtil.createResponse(Json.toJson(pathway), true));
             } else {
@@ -152,7 +152,7 @@ public class PathwayController extends Controller {
                 }
             }
 
-            return pathwayService.updatePathway(existingPathway).thenApplyAsync(result -> {
+            return pathwayService.updatePathway(existingPathway, existingPathway.getPathwayId()).thenApplyAsync(result -> {
                 if (result) {
                     return ok(ApplicationUtil.createResponse(Json.toJson(existingPathway), true));
                 } else {

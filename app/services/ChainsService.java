@@ -98,7 +98,7 @@ public class ChainsService {
                 }), dec);
     }
 
-    public CompletionStage<Boolean> updateChains(Chains chains) {
+    public CompletionStage<Boolean> updateChains(Chains chains, int id) {
         return CompletableFuture.supplyAsync(() ->
                 db.withConnection(connection -> {
                     PreparedStatement statement = connection.prepareStatement(
@@ -112,7 +112,7 @@ public class ChainsService {
                     statement.setString(5, chains.getFormula());
                     statement.setString(6, chains.getCreated());
                     statement.setString(7, chains.getLastUpdated());
-                    statement.setInt(8, chains.getChainsId());
+                    statement.setInt(8, id);
 
                     int rowsUpdated = statement.executeUpdate();
                     return rowsUpdated > 0;

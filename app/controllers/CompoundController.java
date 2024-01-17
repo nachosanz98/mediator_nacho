@@ -89,7 +89,7 @@ public class CompoundController extends Controller {
         }, hec.current());
     }
 
-    public CompletionStage<Result> update(Http.Request request) {
+    public CompletionStage<Result> update(Http.Request request, int id) {
         JsonNode json = request.body().asJson();
 
         if (json == null) {
@@ -99,7 +99,7 @@ public class CompoundController extends Controller {
         }
 
         Compound compound = Json.fromJson(json, Compound.class);
-        return cdb.updateCompound(compound).thenApplyAsync(result -> {
+        return cdb.updateCompound(compound, id).thenApplyAsync(result -> {
             if (result) {
                 return ok(ApplicationUtil.createResponse(Json.toJson(compound), true));
             } else {
@@ -174,7 +174,7 @@ public class CompoundController extends Controller {
                 }
             }
 
-            return cdb.updateCompound(existingCompound).thenApplyAsync(result -> {
+            return cdb.updateCompound(existingCompound, existingCompound.getCompoundId()).thenApplyAsync(result -> {
                 if (result) {
                     return ok(ApplicationUtil.createResponse(Json.toJson(existingCompound), true));
                 } else {

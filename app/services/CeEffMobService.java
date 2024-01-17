@@ -96,7 +96,7 @@ public class CeEffMobService {
                 }), dec);
     }
 
-    public CompletionStage<Boolean> updateCeEffMob(CeEffMob ceEffMob) {
+    public CompletionStage<Boolean> updateCeEffMob(CeEffMob ceEffMob, int id) {
         return CompletableFuture.supplyAsync(() ->
                 db.withConnection(connection -> {
                     PreparedStatement statement = connection.prepareStatement(
@@ -109,7 +109,7 @@ public class CeEffMobService {
                     statement.setDouble(4, ceEffMob.getEffMobility());
                     statement.setString(5, ceEffMob.getCreated());
                     statement.setString(6, ceEffMob.getLastUpdated());
-                    statement.setInt(7, ceEffMob.getCeEffMobId());
+                    statement.setInt(7, id);
 
                     int rowsUpdated = statement.executeUpdate();
                     return rowsUpdated > 0;
