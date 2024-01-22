@@ -39,15 +39,16 @@ public class CompoundController extends Controller {
     }
 
     public CompletionStage<Result> retrieve(int id) {
-
         Executor myEc = HttpExecution.fromThread(dec);
         logger.debug("In CompoundController.retrieve(), retrieve compound with id: {}",id);
 
-        return cdb.getCompound(id).thenApplyAsync(compound ->
-                {
-                    return ok(ApplicationUtil.createResponse(Json.toJson(compound), true));
-                }
-                , hec.current());
+        return cdb.getCompound(id).thenApplyAsync(compound -> {
+            if (compound != null) {
+                return ok(ApplicationUtil.createResponse(Json.toJson(compound), true));
+            } else {
+                return notFound(ApplicationUtil.createResponse("Compound not found", false));
+            }
+        }, hec.current());
     }
 
     public CompletionStage<Result> create(Http.Request request) {

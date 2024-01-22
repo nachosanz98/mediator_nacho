@@ -117,13 +117,13 @@ public class CompoundCasService {
                 }), dec);
     }
 
-    public CompletionStage<List<CompoundCas>> getCompoundCasInRange(int startId, int endId) {
+    public CompletionStage<List<CompoundCas>> getCompoundCasInRange(String startId, String endId) {
         return CompletableFuture.supplyAsync(() ->
                 db.withConnection(connection -> {
                     PreparedStatement statement = connection.prepareStatement(
-                            "SELECT * FROM compounds_cas WHERE cas_id BETWEEN ? AND ?");
-                    statement.setInt(1, startId);
-                    statement.setInt(2, endId);
+                            "SELECT * FROM compounds_cas WHERE cas_id BETWEEN ? AND ? ORDER BY cas_id");
+                    statement.setString(1, startId);
+                    statement.setString(2, endId);
                     ResultSet resultSet = statement.executeQuery();
 
                     List<CompoundCas> compoundCasInRange = new ArrayList<>();

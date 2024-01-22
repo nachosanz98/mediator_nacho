@@ -75,5 +75,23 @@ PUT     /classyfireclassification/:id             controllers.ClassyfireClassifi
 DELETE  /classyfireclassification/:id             controllers.ClassyfireClassificationController.delete(id: Int)
 PATCH   /classyfireclassification/:id             controllers.ClassyfireClassificationController.patchClassyfireClassification(request: Request, id: Int)
 
+# APIs in CeExperimentalPropertiesController
+GET     /ceExpProps/list                          controllers.CeExperimentalPropertiesController.listCeExperimentalProperties()
+GET     /ceExpProps                               controllers.CeExperimentalPropertiesController.listCeExperimentalPropertiesInRange(startId: Int, endId: Int)
+GET     /ceExpProps/:id                           controllers.CeExperimentalPropertiesController.retrieve(id: Int)
+POST    /ceExpProps                               controllers.CeExperimentalPropertiesController.create(request: Request)
+PUT     /ceExpProps/:id                           controllers.CeExperimentalPropertiesController.update(request: Request, id:Int)
+DELETE  /ceExpProps/:id                           controllers.CeExperimentalPropertiesController.delete(id: Int)
+PATCH   /ceExpProps/:id                           controllers.CeExperimentalPropertiesController.patchCeExperimentalProperties(request: Request, id: Int)
+
+# APIs in CompoundCas
+GET     /compoundCas/list                        controllers.CompoundCasController.listCompoundCas()
+GET     /compoundCas                             controllers.CompoundCasController.listCompoundCasInRange(startId: String, endId: String)
+GET     /compoundCas/:id                         controllers.CompoundCasController.retrieve(id: String)
+POST    /compoundCas                             controllers.CompoundCasController.create(request: Request)
+PUT     /compoundCas/:id                         controllers.CompoundCasController.update(request: Request, id: String)
+DELETE  /compoundCas/:id                         controllers.CompoundCasController.delete(id: String)
+PATCH   /compoundCas/:id                         controllers.CompoundCasController.patchCompoundCas(request: Request, id: String)
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

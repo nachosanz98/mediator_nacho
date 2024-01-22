@@ -66,7 +66,16 @@ public class CompoundCasController extends Controller {
         }, hec.current());
     }
 
-    public CompletionStage<Result> update(String casId, Http.Request request) {
+    public CompletionStage<Result> listCompoundCas() {
+        logger.debug("Fetching all Ce Experimental Properties...");
+        return compoundCasService.getAllCompoundCas().thenApplyAsync(compoundCasList -> {
+            JsonNode jsonData = Json.toJson(compoundCasList);
+            logger.debug("Retrieved Ce Experimental Properties: {}", compoundCasList.toString());
+            return ok(ApplicationUtil.createResponse(jsonData, true));
+        }, hec.current());
+    }
+
+    public CompletionStage<Result> update(Http.Request request, String casId) {
         JsonNode json = request.body().asJson();
         CompoundCas compoundCas = Json.fromJson(json, CompoundCas.class);
 
@@ -90,6 +99,15 @@ public class CompoundCasController extends Controller {
             } else {
                 return notFound("CompoundCas not found");
             }
+        }, hec.current());
+    }
+
+    public CompletionStage<Result> listCompoundCasInRange(String startId, String endId) {
+        logger.debug("Fetching all Compounds Cas...");
+        return compoundCasService.getCompoundCasInRange(startId, endId).thenApplyAsync(compoundCasList -> {
+            JsonNode jsonData = Json.toJson(compoundCasList);
+            logger.debug("Retrieved Compounds Cas: {}", compoundCasList.toString());
+            return ok(ApplicationUtil.createResponse(jsonData, true));
         }, hec.current());
     }
 
