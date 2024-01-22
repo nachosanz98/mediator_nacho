@@ -13,49 +13,67 @@ PUT     /employees/                     controllers.EmployeeController.update(re
 DELETE  /employees/:id                  controllers.EmployeeController.delete(id:Int)
 
 # APIs in CompoundController
-GET     /compounds                              controllers.CompoundController.listCompounds()
-GET     /compounds?start=startId&end=endId      controllers.CompoundController.listCompoundsInRange(startId: Int, endId: Int)
+GET     /compounds/list                         controllers.CompoundController.listCompounds()
+GET     /compounds                              controllers.CompoundController.listCompoundsInRange(startId: Int, endId: Int)
 GET     /compounds/:id                          controllers.CompoundController.retrieve(id: Int)
 POST    /compounds                              controllers.CompoundController.create(request:Request)
-PUT     /compounds/                             controllers.CompoundController.update(request:Request, id:Int)
+PUT     /compounds/:id                          controllers.CompoundController.update(request:Request, id:Int)
 DELETE  /compounds/:id                          controllers.CompoundController.delete(id: Int)
 PATCH   /compounds/:id                          controllers.CompoundController.patchCompound(request:Request, id: Int)
 
 # APIs in Pathways
-GET     /pathways                               controllers.PathwayController.listPathways()
-GET     /pathways?start=startId&end=endId       controllers.PathwayController.listPathwaysInRange(startId: Int, endId: Int)
+GET     /pathways/list                          controllers.PathwayController.listPathways()
+GET     /pathways                               controllers.PathwayController.listPathwaysInRange(startId: Int, endId: Int)
 GET     /pathways/:id                           controllers.PathwayController.retrieve(id: Int)
 POST    /pathways                               controllers.PathwayController.create(request: Request)
-PUT     /pathways/                              controllers.PathwayController.update(request: Request, id:Int)
+PUT     /pathways/:id                           controllers.PathwayController.update(request: Request, id:Int)
 DELETE  /pathways/:id                           controllers.PathwayController.delete(id: Int)
 PATCH   /pathways/:id                           controllers.PathwayController.patchPathway(request: Request, id: Int)
 
 # APIs in MsmsController
-GET     /msms                                   controllers.MsmsController.listMsms()
-GET     /msms/:startId-:endId                   controllers.MsmsController.listMsmsInRange(startId: Int, endId: Int)
-GET     /msms?start=startId&end=endId           controllers.MsmsController.retrieve(id: Int)
+GET     /msms/list                              controllers.MsmsController.listMsms()
+GET     /msms                                   controllers.MsmsController.listMsmsInRange(startId: Int, endId: Int)
+GET     /msms/:id                               controllers.MsmsController.retrieve(id: Int)
 POST    /msms                                   controllers.MsmsController.create(request: Request)
-PUT     /msms/                                  controllers.MsmsController.update(request: Request, id:Int)
+PUT     /msms/:id                               controllers.MsmsController.update(request: Request, id:Int)
 DELETE  /msms/:id                               controllers.MsmsController.delete(id: Int)
 PATCH   /msms/:id                               controllers.MsmsController.patchMsms(request: Request, id: Int)
 
 # APIs in CeEffMobController
-GET     /ceEffMob                               controllers.CeEffMobController.listCeEffMobs()
-GET     /ceEffMob/:startId-:endId               controllers.CeEffMobController.listCeEffMobsInRange(startId: Int, endId: Int)
-GET     /ceEffMob?start=startId&end=endId       controllers.CeEffMobController.retrieve(id: Int)
+GET     /ceEffMob/list                          controllers.CeEffMobController.listCeEffMobs()
+GET     /ceEffMob                               controllers.CeEffMobController.listCeEffMobsInRange(startId: Int, endId: Int)
+GET     /ceEffMob/:id                           controllers.CeEffMobController.retrieve(id: Int)
 POST    /ceEffMob                               controllers.CeEffMobController.create(request: Request)
-PUT     /ceEffMob/                              controllers.CeEffMobController.update(request: Request, id:Int)
+PUT     /ceEffMob/:id                           controllers.CeEffMobController.update(request: Request, id:Int)
 DELETE  /ceEffMob/:id                           controllers.CeEffMobController.delete(id: Int)
 PATCH   /ceEffMob/:id                           controllers.CeEffMobController.patchCeEffMob(request: Request, id: Int)
 
 # APIs in ChainsController
-GET     /chains                                 controllers.ChainsController.listChains()
-GET     /chains/:startId-:endId                 controllers.ChainsController.listChainsInRange(startId: Int, endId: Int)
-GET     /chains?start=startId&end=endId         controllers.ChainsController.retrieve(id: Int)
+GET     /chains/list                            controllers.ChainsController.listChains()
+GET     /chains                                 controllers.ChainsController.listChainsInRange(startId: Int, endId: Int)
+GET     /chains/:id                             controllers.ChainsController.retrieve(id: Int)
 POST    /chains                                 controllers.ChainsController.create(request: Request)
-PUT     /chains/                                controllers.ChainsController.update(request: Request, id:Int)
+PUT     /chains/:id                             controllers.ChainsController.update(request: Request, id:Int)
 DELETE  /chains/:id                             controllers.ChainsController.delete(id: Int)
 PATCH   /chains/:id                             controllers.ChainsController.patchChains(request: Request, id: Int)
+
+# APIs in OntologyTermsController
+GET     /ontologyTerms/list                       controllers.OntologyTermsController.listOntologyTerms()
+GET     /ontologyTerms                            controllers.OntologyTermsController.listOntologyTermsInRange(startId: Int, endId: Int)
+GET     /ontologyTerms/:id                        controllers.OntologyTermsController.retrieve(id: Int)
+POST    /ontologyTerms                            controllers.OntologyTermsController.create(request: Request)
+PUT     /ontologyTerms/:id                        controllers.OntologyTermsController.update(request: Request, id:Int)
+DELETE  /ontologyTerms/:id                        controllers.OntologyTermsController.delete(id: Int)
+PATCH   /ontologyTerms/:id                        controllers.OntologyTermsController.patchOntologyTerms(request: Request, id: Int)
+
+# APIs in ClassyfireClassificationController
+GET     /classyfireclassification/list            controllers.ClassyfireClassificationController.listClassyfireClassifications()
+GET     /classyfireclassification                 controllers.ClassyfireClassificationController.listClassyfireClassificationInRange(startId: Int, endId: Int)
+GET     /classyfireclassification/:id             controllers.ClassyfireClassificationController.retrieve(id: Int)
+POST    /classyfireclassification                 controllers.ClassyfireClassificationController.create(request: Request)
+PUT     /classyfireclassification/:id             controllers.ClassyfireClassificationController.update(request: Request, id:Int)
+DELETE  /classyfireclassification/:id             controllers.ClassyfireClassificationController.delete(id: Int)
+PATCH   /classyfireclassification/:id             controllers.ClassyfireClassificationController.patchClassyfireClassification(request: Request, id: Int)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

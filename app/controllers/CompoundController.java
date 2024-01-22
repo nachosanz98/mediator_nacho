@@ -169,6 +169,144 @@ public class CompoundController extends Controller {
                     case "logP":
                         existingCompound.setLogP(fieldValue.asDouble());
                         break;
+                    case "smiles":
+                        existingCompound.setSmiles(fieldValue.asText());
+                        break;
+                    case "createdIdentifier":
+                        existingCompound.setCreatedIdentifier(fieldValue.asText());
+                        break;
+                    case "lastUpdatedIdentifier":
+                        existingCompound.setLastUpdatedIdentifier(fieldValue.asText());
+                        break;
+                    case "agilent_id":
+                        existingCompound.setAgilentId(fieldValue.asInt());
+                        break;
+                    case "createdAgilent":
+                        existingCompound.setCreatedAgilent(fieldValue.asText());
+                        break;
+                    case "lastUpdatedAgilent":
+                        existingCompound.setLastUpdatedAgilent(fieldValue.asText());
+                        break;
+                    case "chebiId":
+                        existingCompound.setChebiId(fieldValue.asInt());
+                        break;
+                    case "createdChebi":
+                        existingCompound.setCreatedChebi(fieldValue.asText());
+                        break;
+                    case "lastUpdatedChebi":
+                        existingCompound.setLastUpdatedChebi(fieldValue.asText());
+                        break;
+                    case "mineID":
+                        existingCompound.setMineID(fieldValue.asInt());
+                        break;
+                    case "mineFileID":
+                        existingCompound.setMineFileID(fieldValue.asText());
+                        break;
+                    case "npLikeness":
+                        existingCompound.setNpLikeness(fieldValue.asDouble());
+                        break;
+                    case "createdGen":
+                        existingCompound.setCreatedGen(fieldValue.asText());
+                        break;
+                    case "lastUpdatedGen":
+                        existingCompound.setLastUpdatedGen(fieldValue.asText());
+                        break;
+                    case "hmdbId":
+                        existingCompound.setHmdbId(fieldValue.asInt());
+                        break;
+                    case "createdHmdb":
+                        existingCompound.setCreatedHmdb(fieldValue.asText());
+                        break;
+                    case "lastUpdatedHmdb":
+                        existingCompound.setLastUpdatedHmdb(fieldValue.asText());
+                        break;
+                    case "inHouseID":
+                        existingCompound.setInHouseID(fieldValue.asInt());
+                        break;
+                    case "sourceData":
+                        existingCompound.setSourceData(fieldValue.asText());
+                        break;
+                    case "description":
+                        existingCompound.setDescription(fieldValue.asText());
+                        break;
+                    case "createdInHouse":
+                        existingCompound.setCreatedInHouse(fieldValue.asText());
+                        break;
+                    case "lastUpdatedInHouse":
+                        existingCompound.setLastUpdatedInHouse(fieldValue.asText());
+                        break;
+                    case "keggId":
+                        existingCompound.setKeggId(fieldValue.asInt());
+                        break;
+                    case "createdKegg":
+                        existingCompound.setCreatedKegg(fieldValue.asText());
+                        break;
+                    case "lastUpdatedKegg":
+                        existingCompound.setLastUpdatedKegg(fieldValue.asText());
+                        break;
+                    case "lipidType":
+                        existingCompound.setLipidType(fieldValue.asText());
+                        break;
+                    case "numChains":
+                        existingCompound.setNumChains(fieldValue.asInt());
+                        break;
+                    case "numCarbons":
+                        existingCompound.setNumCarbons(fieldValue.asInt());
+                        break;
+                    case "doubleBonds":
+                        existingCompound.setDoubleBonds(fieldValue.asInt());
+                        break;
+                    case "createdLipid":
+                        existingCompound.setCreatedLipid(fieldValue.asText());
+                        break;
+                    case "lastUpdatedLipid":
+                        existingCompound.setLastUpdatedLipid(fieldValue.asText());
+                        break;
+                    case "lmId":
+                        existingCompound.setLmId(fieldValue.asInt());
+                        break;
+                    case "createdLm":
+                        existingCompound.setCreatedLm(fieldValue.asText());
+                        break;
+                    case "lastUpdatedLm":
+                        existingCompound.setLastUpdatedLm(fieldValue.asText());
+                        break;
+                    case "category":
+                        existingCompound.setCategory(fieldValue.asText());
+                        break;
+                    case "mainClass":
+                        existingCompound.setMainClass(fieldValue.asText());
+                        break;
+                    case "subClass":
+                        existingCompound.setSubClass(fieldValue.asText());
+                        break;
+                    case "classLevel4":
+                        existingCompound.setClassLevel4(fieldValue.asText());
+                        break;
+                    case "createdLmClassification":
+                        existingCompound.setCreatedLmClassification(fieldValue.asText());
+                        break;
+                    case "lastUpdatedLmClassification":
+                        existingCompound.setLastUpdatedLmClassification(fieldValue.asText());
+                        break;
+                    case "pcId":
+                        existingCompound.setPcId(fieldValue.asInt());
+                        break;
+                    case "createdPc":
+                        existingCompound.setCreatedPc(fieldValue.asText());
+                        break;
+                    case "lastUpdatedPc":
+                        existingCompound.setLastUpdatedPc(fieldValue.asText());
+                        break;
+                    case "reactionId":
+                        existingCompound.setReactionId(fieldValue.asInt());
+                        break;
+                    case "createdReaction":
+                        existingCompound.setCreatedReaction(fieldValue.asText());
+                        break;
+                    case "lastUpdatedReaction":
+                        existingCompound.setLastUpdatedReaction(fieldValue.asText());
+                        break;
                     default:
                         break;
                 }

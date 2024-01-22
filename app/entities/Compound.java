@@ -27,12 +27,6 @@ public class Compound {
     private String createdAgilent;
     private String lastUpdatedAgilent;
 
-    /* compound_cas */
-    private String inchi;
-    private String inchiKey;
-    private String createdCas;
-    private String lastUpdatedCas;
-
     /* compound_chebi */
     private int chebiId;
     private String createdChebi;
@@ -116,10 +110,6 @@ public class Compound {
         this.agilent_id = 0;
         this.createdAgilent = "";
         this.lastUpdatedAgilent = "";
-        this.inchi = "";
-        this.inchiKey = "";
-        this.createdCas = "";
-        this.lastUpdatedCas = "";
         this.chebiId = 0;
         this.createdChebi = "";
         this.lastUpdatedChebi = "";
@@ -198,10 +188,6 @@ public class Compound {
         this.agilent_id = agilent_id;
         this.createdAgilent = createdAgilent;
         this.lastUpdatedAgilent = lastUpdatedAgilent;
-        this.inchi = inchi;
-        this.inchiKey = inchiKey;
-        this.createdCas = createdCas;
-        this.lastUpdatedCas = lastUpdatedCas;
         this.chebiId = chebiId;
         this.createdChebi = createdChebi;
         this.lastUpdatedChebi = lastUpdatedChebi;
@@ -404,37 +390,9 @@ public class Compound {
         this.lastUpdatedAgilent = lastUpdatedAgilent;
     }
 
-    public String getInchi() {
-        return inchi;
-    }
 
-    public void setInchi(String inchi) {
-        this.inchi = inchi;
-    }
 
-    public String getInchiKey() {
-        return inchiKey;
-    }
 
-    public void setInchiKey(String inchiKey) {
-        this.inchiKey = inchiKey;
-    }
-
-    public String getCreatedCas() {
-        return createdCas;
-    }
-
-    public void setCreatedCas(String createdCas) {
-        this.createdCas = createdCas;
-    }
-
-    public String getLastUpdatedCas() {
-        return lastUpdatedCas;
-    }
-
-    public void setLastUpdatedCas(String lastUpdatedCas) {
-        this.lastUpdatedCas = lastUpdatedCas;
-    }
 
     public int getChebiId() {
         return chebiId;
@@ -778,10 +736,6 @@ public class Compound {
                 ", agilent_id=" + agilent_id +
                 ", createdAgilent='" + createdAgilent + '\'' +
                 ", lastUpdatedAgilent='" + lastUpdatedAgilent + '\'' +
-                ", inchi='" + inchi + '\'' +
-                ", inchiKey='" + inchiKey + '\'' +
-                ", createdCas='" + createdCas + '\'' +
-                ", lastUpdatedCas='" + lastUpdatedCas + '\'' +
                 ", chebiId=" + chebiId +
                 ", createdChebi='" + createdChebi + '\'' +
                 ", lastUpdatedChebi='" + lastUpdatedChebi + '\'' +

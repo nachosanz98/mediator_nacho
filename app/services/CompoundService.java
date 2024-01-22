@@ -91,24 +91,6 @@ public class CompoundService {
                         }
                     }
 
-                    /* compound_cas */
-                    if (rowsInserted > 0 && !compound.getCreatedCas().isEmpty()) {
-                        PreparedStatement casStatement = connection.prepareStatement(
-                                "INSERT INTO compounds_cas (cas_id, formula, mass, inchi, inchi_key, " +
-                                        "created, last_updated) VALUES (?, ?, ?, ?, ?, ?, ?)");
-                        casStatement.setString(1, compound.getCasId());
-                        casStatement.setString(2, compound.getFormula());
-                        casStatement.setDouble(3, compound.getMass());
-                        casStatement.setString(4, compound.getInchi());
-                        casStatement.setString(5, compound.getInchiKey());
-                        casStatement.setString(6, compound.getCreatedCas());
-                        casStatement.setString(7, compound.getLastUpdatedCas());
-                        int casRowsInserted = casStatement.executeUpdate();
-                        if (casRowsInserted == 0) {
-                            return false;
-                        }
-                    }
-
                     /* compound_chebi */
                     if (rowsInserted > 0 && !compound.getCreatedChebi().isEmpty()) {
                         PreparedStatement chebiStatement = connection.prepareStatement(
@@ -279,6 +261,62 @@ public class CompoundService {
                             "DELETE FROM compounds WHERE compound_id = ?");
                     statement.setInt(1, compoundId);
                     int rowsDeleted = statement.executeUpdate();
+                    if (rowsDeleted > 0) {
+                        PreparedStatement agilentStatement = connection.prepareStatement(
+                                "DELETE FROM compounds_agilent WHERE compound_id = ?");
+                        agilentStatement.setInt(1, compoundId);
+                        agilentStatement.executeUpdate();
+
+                        PreparedStatement chebiStatement = connection.prepareStatement(
+                                "DELETE FROM compounds_chebi WHERE compound_id = ?");
+                        chebiStatement.setInt(1, compoundId);
+                        chebiStatement.executeUpdate();
+
+                        PreparedStatement genStatement = connection.prepareStatement(
+                                "DELETE FROM compounds_gen WHERE compound_id = ?");
+                        genStatement.setInt(1, compoundId);
+                        genStatement.executeUpdate();
+
+                        PreparedStatement hmdbStatement = connection.prepareStatement(
+                                "DELETE FROM compounds_hmdb WHERE compound_id = ?");
+                        hmdbStatement.setInt(1, compoundId);
+                        hmdbStatement.executeUpdate();
+
+                        PreparedStatement inhouseStatement = connection.prepareStatement(
+                                "DELETE FROM compounds_in_house WHERE compound_id = ?");
+                        inhouseStatement.setInt(1, compoundId);
+                        inhouseStatement.executeUpdate();
+
+                        PreparedStatement keggStatement = connection.prepareStatement(
+                                "DELETE FROM compounds_kegg WHERE compound_id = ?");
+                        keggStatement.setInt(1, compoundId);
+                        keggStatement.executeUpdate();
+
+                        PreparedStatement lipidStatement = connection.prepareStatement(
+                                "DELETE FROM compounds_lipids_classification WHERE compound_id = ?");
+                        lipidStatement.setInt(1, compoundId);
+                        lipidStatement.executeUpdate();
+
+                        PreparedStatement lmStatement = connection.prepareStatement(
+                                "DELETE FROM compounds_lm WHERE compound_id = ?");
+                        lmStatement.setInt(1, compoundId);
+                        lmStatement.executeUpdate();
+
+                        PreparedStatement lmclasStatement = connection.prepareStatement(
+                                "DELETE FROM compounds_lm_classification WHERE compound_id = ?");
+                        lmclasStatement.setInt(1, compoundId);
+                        lmclasStatement.executeUpdate();
+
+                        PreparedStatement pcStatement = connection.prepareStatement(
+                                "DELETE FROM compounds_pc WHERE compound_id = ?");
+                        pcStatement.setInt(1, compoundId);
+                        pcStatement.executeUpdate();
+
+                        PreparedStatement reactionStatement = connection.prepareStatement(
+                                "DELETE FROM compound_reactions_kegg WHERE compound_id = ?");
+                        reactionStatement.setInt(1, compoundId);
+                        reactionStatement.executeUpdate();
+                    }
                     return rowsDeleted > 0;
                 }), dec);
     }
@@ -335,6 +373,159 @@ public class CompoundService {
                     statement.setInt(14, id);
 
                     int rowsUpdated = statement.executeUpdate();
+
+                    if (rowsUpdated > 0 && !compound.getCreatedAgilent().isEmpty()) {
+                        PreparedStatement agilentStatement = connection.prepareStatement(
+                                "UPDATE compounds_agilent SET created = ?, last_updated = ? WHERE agilent_id = ?");
+                        agilentStatement.setString(1, compound.getCreatedAgilent());
+                        agilentStatement.setString(2, compound.getLastUpdatedAgilent());
+                        agilentStatement.setInt(3, compound.getAgilentId());
+                        int agilentRowsUpdated = agilentStatement.executeUpdate();
+                        if (agilentRowsUpdated == 0) {
+                            return false;
+                        }
+                    }
+
+                    if (rowsUpdated > 0 && !compound.getCreatedChebi().isEmpty()) {
+                        PreparedStatement chebiStatement = connection.prepareStatement(
+                                "UPDATE compounds_chebi SET created = ?, last_updated = ? WHERE chebi_id = ?");
+                        chebiStatement.setString(1, compound.getCreatedChebi());
+                        chebiStatement.setString(2, compound.getLastUpdatedChebi());
+                        chebiStatement.setInt(3, compound.getChebiId());
+                        int chebiRowsUpdated = chebiStatement.executeUpdate();
+                        if (chebiRowsUpdated == 0) {
+                            return false;
+                        }
+                    }
+
+                    if (rowsUpdated > 0 && !compound.getCreatedGen().isEmpty()) {
+                        PreparedStatement genStatement = connection.prepareStatement(
+                                "UPDATE compounds_gen SET compound_name = ?, formula = ?, mass = ?, charge_type = ?, " +
+                                        "charge_number = ?, np_likeness = ?, formula_type = ?, formula_type_int = ?, " +
+                                        "created = ?, last_updated = ? WHERE MINE_id = ?");
+                        genStatement.setString(1, compound.getCompoundName());
+                        genStatement.setString(2, compound.getFormula());
+                        genStatement.setDouble(3, compound.getMass());
+                        genStatement.setInt(4, compound.getChargeType());
+                        genStatement.setInt(5, compound.getChargeNumber());
+                        genStatement.setDouble(6, compound.getNpLikeness());
+                        genStatement.setString(7, compound.getFormulaType());
+                        genStatement.setInt(8, compound.getFormulaTypeInt());
+                        genStatement.setString(9, compound.getCreatedGen());
+                        genStatement.setString(10, compound.getLastUpdatedGen());
+                        genStatement.setInt(11, compound.getMineID());
+                        int genRowsUpdated = genStatement.executeUpdate();
+                        if (genRowsUpdated == 0) {
+                            return false;
+                        }
+                    }
+
+                    if (rowsUpdated > 0 && !compound.getCreatedHmdb().isEmpty()) {
+                        PreparedStatement hmdbStatement = connection.prepareStatement(
+                                "UPDATE compounds_hmdb SET created = ?, last_updated = ? WHERE hmdb_id = ?");
+                        hmdbStatement.setString(1, compound.getCreatedHmdb());
+                        hmdbStatement.setString(2, compound.getLastUpdatedHmdb());
+                        hmdbStatement.setInt(3, compound.getHmdbId());
+                        int hmdbRowsUpdated = hmdbStatement.executeUpdate();
+                        if (hmdbRowsUpdated == 0) {
+                            return false;
+                        }
+                    }
+
+                    if (rowsUpdated > 0 && !compound.getCreatedInHouse().isEmpty()) {
+                        PreparedStatement inhouseStatement = connection.prepareStatement(
+                                "UPDATE compounds_in_house SET source_data = ?, description = ?, created = ?, last_updated = ? WHERE in_house_id = ?");
+                        inhouseStatement.setString(1, compound.getSourceData());
+                        inhouseStatement.setString(2, compound.getDescription());
+                        inhouseStatement.setString(3, compound.getCreatedInHouse());
+                        inhouseStatement.setString(4, compound.getLastUpdatedInHouse());
+                        inhouseStatement.setInt(5, compound.getInHouseID());
+                        int inhouseRowsUpdated = inhouseStatement.executeUpdate();
+                        if (inhouseRowsUpdated == 0) {
+                            return false;
+                        }
+                    }
+
+                    if (rowsUpdated > 0 && !compound.getCreatedKegg().isEmpty()) {
+                        PreparedStatement keggStatement = connection.prepareStatement(
+                                "UPDATE compounds_kegg SET created = ?, last_updated = ? WHERE kegg_id = ?");
+                        keggStatement.setString(1, compound.getCreatedKegg());
+                        keggStatement.setString(2, compound.getLastUpdatedKegg());
+                        keggStatement.setInt(3, compound.getKeggId());
+                        int keggRowsUpdated = keggStatement.executeUpdate();
+                        if (keggRowsUpdated == 0) {
+                            return false;
+                        }
+                    }
+
+                    if (rowsUpdated > 0 && !compound.getCreatedLipid().isEmpty()) {
+                        PreparedStatement lipidStatement = connection.prepareStatement(
+                                "UPDATE compounds_lipids_classification SET num_chains = ?, number_carbons = ?, " +
+                                        "double_bonds = ?, created = ?, last_updated = ? WHERE lipid_type = ?");
+                        lipidStatement.setInt(1, compound.getNumChains());
+                        lipidStatement.setInt(2, compound.getNumCarbons());
+                        lipidStatement.setInt(3, compound.getDoubleBonds());
+                        lipidStatement.setString(4, compound.getCreatedLipid());
+                        lipidStatement.setString(5, compound.getLastUpdatedLipid());
+                        lipidStatement.setString(6, compound.getLipidType());
+                        int lipidRowsUpdated = lipidStatement.executeUpdate();
+                        if (lipidRowsUpdated == 0) {
+                            return false;
+                        }
+                    }
+
+                    if (rowsUpdated > 0 && !compound.getCreatedLm().isEmpty()) {
+                        PreparedStatement lmStatement = connection.prepareStatement(
+                                "UPDATE compounds_lm SET created = ?, last_updated = ? WHERE lm_id = ?");
+                        lmStatement.setString(1, compound.getCreatedLm());
+                        lmStatement.setString(2, compound.getLastUpdatedLm());
+                        lmStatement.setInt(3, compound.getLmId());
+                        int lmRowsUpdated = lmStatement.executeUpdate();
+                        if (lmRowsUpdated == 0) {
+                            return false;
+                        }
+                    }
+
+                    if (rowsUpdated > 0 && !compound.getCreatedLmClassification().isEmpty()) {
+                        PreparedStatement lmclasStatement = connection.prepareStatement(
+                                "UPDATE compounds_lm_classification SET main_class = ?, sub_class = ?, " +
+                                        "class_level4 = ?, created = ?, last_updated = ? WHERE category = ?");
+                        lmclasStatement.setString(1, compound.getMainClass());
+                        lmclasStatement.setString(2, compound.getSubClass());
+                        lmclasStatement.setString(3, compound.getClassLevel4());
+                        lmclasStatement.setString(4, compound.getCreatedLmClassification());
+                        lmclasStatement.setString(5, compound.getLastUpdatedLmClassification());
+                        lmclasStatement.setString(6, compound.getCategory());
+                        int lmclasRowsUpdated = lmclasStatement.executeUpdate();
+                        if (lmclasRowsUpdated == 0) {
+                            return false;
+                        }
+                    }
+
+                    if (rowsUpdated > 0 && !compound.getCreatedPc().isEmpty()) {
+                        PreparedStatement pcStatement = connection.prepareStatement(
+                                "UPDATE compounds_pc SET created = ?, last_updated = ? WHERE pc_id = ?");
+                        pcStatement.setString(1, compound.getCreatedPc());
+                        pcStatement.setString(2, compound.getLastUpdatedPc());
+                        pcStatement.setInt(3, compound.getPcId());
+                        int pcRowsUpdated = pcStatement.executeUpdate();
+                        if (pcRowsUpdated == 0) {
+                            return false;
+                        }
+                    }
+
+                    if (rowsUpdated > 0 && !compound.getCreatedReaction().isEmpty()) {
+                        PreparedStatement reactionStatement = connection.prepareStatement(
+                                "UPDATE compound_reactions_kegg SET created = ?, last_updated = ? WHERE reaction_id = ?");
+                        reactionStatement.setString(1, compound.getCreatedReaction());
+                        reactionStatement.setString(2, compound.getLastUpdatedReaction());
+                        reactionStatement.setInt(3, compound.getReactionId());
+                        int reactionRowsUpdated = reactionStatement.executeUpdate();
+                        if (reactionRowsUpdated == 0) {
+                            return false;
+                        }
+                    }
+
                     return rowsUpdated > 0;
                 }), dec);
     }

@@ -15,7 +15,7 @@ public class OntologyTerms {
     private String lastUpdated;
 
     /* ontology_synonyms */
-    private String OntologySynonym;
+    private String ontologySynonym;
     private String createdSynonym;
     private String lastUpdatedSynonym;
 
@@ -32,11 +32,14 @@ public class OntologyTerms {
         this.ontologyLevel = 0;
         this.created = "";
         this.lastUpdated = "";
+        this.ontologySynonym = "";
+        this.createdSynonym = "";
+        this.lastUpdatedSynonym = "";
     }
 
     public OntologyTerms(int ontologyTermId, String term, String definition, String externalId, String externalSource,
                          String ontologyComment, String curator, int parentId, int ontologyLevel, String created,
-                         String lastUpdated) {
+                         String lastUpdated, String ontologySynonym, String createdSynonym, String lastUpdatedSynonym) {
         this.ontologyTermId = ontologyTermId;
         this.term = term;
         this.definition = definition;
@@ -48,6 +51,9 @@ public class OntologyTerms {
         this.ontologyLevel = ontologyLevel;
         this.created = created;
         this.lastUpdated = lastUpdated;
+        this.ontologySynonym = ontologySynonym;
+        this.createdSynonym = createdSynonym;
+        this.lastUpdatedSynonym = lastUpdatedSynonym;
     }
 
     public int getOntologyTermId() {
@@ -138,11 +144,11 @@ public class OntologyTerms {
         this.lastUpdated = lastUpdated;
     }
     public String getOntologySynonym() {
-        return OntologySynonym;
+        return ontologySynonym;
     }
 
     public void setOntologySynonym(String ontologySynonym) {
-        OntologySynonym = ontologySynonym;
+        this.ontologySynonym = ontologySynonym;
     }
 
     public String getCreatedSynonym() {
