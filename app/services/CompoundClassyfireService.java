@@ -50,8 +50,8 @@ public class CompoundClassyfireService {
 
                     statement.setInt(1, compoundClassyfire.getCompoundId());
                     statement.setString(2, compoundClassyfire.getNodeId());
-                    statement.setString(4, compoundClassyfire.getCreated());
-                    statement.setString(5, compoundClassyfire.getLastUpdated());
+                    statement.setString(3, compoundClassyfire.getCreated());
+                    statement.setString(4, compoundClassyfire.getLastUpdated());
 
                     int rowsInserted = statement.executeUpdate();
                     return rowsInserted > 0;
