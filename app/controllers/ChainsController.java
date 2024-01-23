@@ -74,7 +74,7 @@ public class ChainsController extends Controller {
     }
 
     public CompletionStage<Result> delete(int id) {
-        logger.debug("In ChainController.delete(), delete Chains with id: {}", id);
+        logger.debug("Attempting to delete Chains with id: {}", id);
         return chs.deleteChains(id).thenApplyAsync(result -> {
             if (result) {
                 return ok(ApplicationUtil.createResponse("Chains with id: " + id + " deleted", true));

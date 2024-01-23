@@ -93,6 +93,7 @@ public class CompoundCasController extends Controller {
     }
 
     public CompletionStage<Result> delete(String casId) {
+        logger.debug("Attempting to delete CompoundCas with id: {}", casId);
         return compoundCasService.deleteCompoundCas(casId).thenApplyAsync(result -> {
             if (result) {
                 return ok("CompoundCas deleted successfully");

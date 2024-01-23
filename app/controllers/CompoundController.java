@@ -80,7 +80,7 @@ public class CompoundController extends Controller {
     }
 
     public CompletionStage<Result> delete(int id) {
-        logger.debug("In CompoundController.retrieve(), delete compound with id: {}", id);
+        logger.debug("Attempting to delete Compound with id: {}", id);
         return cdb.deleteCompound(id).thenApplyAsync(result -> {
             if (result) {
                 return ok(ApplicationUtil.createResponse("Compound with id: " + id + " deleted", true));

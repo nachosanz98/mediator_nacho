@@ -41,7 +41,7 @@ public class CeExperimentalPropertiesController {
 
     public CompletionStage<Result> retrieve(int id) {
         Executor myEc = HttpExecution.fromThread(dec);
-        logger.debug("In MsmsController.retrieve(), retrieve pathway with id: {}", id);
+        logger.debug("In CeExperimentalPropertiesController.retrieve(), retrieve pathway with id: {}", id);
         return cep.getCeExperimentalProperty(id).thenApplyAsync(ceExpProp -> {
             if (ceExpProp != null) {
                 return ok(ApplicationUtil.createResponse(Json.toJson(ceExpProp), true));
@@ -78,7 +78,6 @@ public class CeExperimentalPropertiesController {
     }
 
     public CompletionStage<Result> delete(int id) {
-        logger.debug("In CeExperimentalPropertiesController.retrieve(), delete pathway with id: {}", id);
         return cep.deleteCeExperimentalProperty(id).thenApplyAsync(result -> {
             if (result) {
                 return ok(ApplicationUtil.createResponse("Ce Experimental Property with id: " + id + " deleted", true));

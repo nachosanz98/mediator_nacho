@@ -74,7 +74,7 @@ public class CeEffMobController extends Controller {
     }
 
     public CompletionStage<Result> delete(int id) {
-        logger.debug("In CeEffMob.retrieve(), delete pathway with id: {}", id);
+        logger.debug("Attempting to delete CeEffMob with id: {}", id);
         return cems.deleteCeEffMob(id).thenApplyAsync(result -> {
             if (result) {
                 return ok(ApplicationUtil.createResponse("CeEffMob with id: " + id + " deleted", true));

@@ -79,7 +79,7 @@ public class MsmsController extends Controller {
     }
 
     public CompletionStage<Result> delete(int id) {
-        logger.debug("In MsmsController.retrieve(), delete pathway with id: {}", id);
+        logger.debug("Attempting to delete Msms with id: {}", id);
         return msmsService.deleteMsms(id).thenApplyAsync(result -> {
             if (result) {
                 return ok(ApplicationUtil.createResponse("Msms with id: " + id + " deleted", true));

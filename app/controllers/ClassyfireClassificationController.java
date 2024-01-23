@@ -78,7 +78,7 @@ public class ClassyfireClassificationController extends Controller {
     }
 
     public CompletionStage<Result> delete(int id) {
-        logger.debug("In ClassyfireClassificationController.retrieve(), delete pathway with id: {}", id);
+        logger.debug("Attempting to delete Classyfire Classification with id: {}", id);
         return classyfireClassificationService.deleteClassyfireClassification(id).thenApplyAsync(result -> {
             if (result) {
                 return ok(ApplicationUtil.createResponse("Classyfire Classification with id: " + id + " deleted", true));

@@ -76,7 +76,7 @@ public class PathwayController extends Controller {
     }
 
     public CompletionStage<Result> delete(int id) {
-        logger.debug("In PathwayController.retrieve(), delete pathway with id: {}", id);
+        logger.debug("Attempting to delete Ontology Term with id: {}", id);
         return pathwayService.deletePathway(id).thenApplyAsync(result -> {
             if (result) {
                 return ok(ApplicationUtil.createResponse("Pathway with id: " + id + " deleted", true));
