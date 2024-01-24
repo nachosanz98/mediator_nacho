@@ -25,7 +25,13 @@ public class ClassyfireClassificationService {
         return CompletableFuture.supplyAsync(() ->
                 db.withConnection(connection -> {
                     PreparedStatement statement = connection.prepareStatement(
-                            "SELECT * FROM classyfire_classification_dictionary WHERE classyfire_id = ?");
+                            "SELECT c.*, " +
+                                    "cl.node_id, cl.kingdom, cl.super_class, cl.main_class, cl.sub_class, cl.direct_parent," +
+                                    "cl.level_7, cl.level_8, cl.level_9, cl.level_10, cl.level_11, cl.created as createdClassyfire, " +
+                                    "cl.last_updated as lastUpdatedClassyfire " +
+                                    "FROM classyfire_classification_dictionary c" +
+                                    "LEFT JOIN classyfire_classification cl ON c.node_id = cl.node_id " +
+                                    "WHERE c.classyfire_id = ?");
                     statement.setInt(1, id);
                     ResultSet resultSet = statement.executeQuery();
 
@@ -36,6 +42,21 @@ public class ClassyfireClassificationService {
                         classyfireClassificationDictionary.setNodeName(resultSet.getString("node_name"));
                         classyfireClassificationDictionary.setCreatedDictionary(resultSet.getString("created"));
                         classyfireClassificationDictionary.setLastUpdatedDictionary(resultSet.getString("last_updated"));
+                        
+                        /*classyfire_classification_dictionary*/
+                        classyfireClassificationDictionary.setKingdom(resultSet.getString("kingdom"));
+                        classyfireClassificationDictionary.setSuperClass(resultSet.getString("super_class"));
+                        classyfireClassificationDictionary.setMainClass(resultSet.getString("main_class"));
+                        classyfireClassificationDictionary.setSubClass(resultSet.getString("sub_class"));
+                        classyfireClassificationDictionary.setDirectParent(resultSet.getString("direct_parent"));
+                        classyfireClassificationDictionary.setLevel7(resultSet.getString("level_7"));
+                        classyfireClassificationDictionary.setLevel8(resultSet.getString("level_8"));
+                        classyfireClassificationDictionary.setLevel9(resultSet.getString("level_9"));
+                        classyfireClassificationDictionary.setLevel10(resultSet.getString("level_10"));
+                        classyfireClassificationDictionary.setLevel11(resultSet.getString("level_11"));
+                        classyfireClassificationDictionary.setCreated(resultSet.getString("createdClassyfire"));
+                        classyfireClassificationDictionary.setLastUpdated(resultSet.getString("lastUpdatedClassyfire"));
+                        
                         return classyfireClassificationDictionary;
                     }
                     return null;
@@ -56,6 +77,31 @@ public class ClassyfireClassificationService {
                     statement.setString(5, classification.getLastUpdatedDictionary());
 
                     int rowsInserted = statement.executeUpdate();
+
+                    /* classyfire_classification_dictionary */
+                    if (rowsInserted > 0 && !classification.getCreated().isEmpty()) {
+                        PreparedStatement classyStatement = connection.prepareStatement(
+                                "INSERT INTO classyfire_classification (node_id, kingdom, super_class, main_class, sub_class, " +
+                                        "direct_parent, level_7, level_8, level_9, level_10, level_11, created, last_updated) " +
+                                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                        classyStatement.setString(1, classification.getNodeId());
+                        classyStatement.setString(2, classification.getKingdom());
+                        classyStatement.setString(3, classification.getSuperClass());
+                        classyStatement.setString(4, classification.getMainClass());
+                        classyStatement.setString(5, classification.getSubClass());
+                        classyStatement.setString(6, classification.getDirectParent());
+                        classyStatement.setString(7, classification.getLevel7());
+                        classyStatement.setString(8, classification.getLevel8());
+                        classyStatement.setString(9, classification.getLevel9());
+                        classyStatement.setString(10, classification.getLevel10());
+                        classyStatement.setString(11, classification.getLevel11());
+                        classyStatement.setString(12, classification.getCreated());
+                        classyStatement.setString(13, classification.getLastUpdated());
+                        int classyRowsInserted = classyStatement.executeUpdate();
+                        if (classyRowsInserted == 0) {
+                            return false;
+                        }
+                    }
                     return rowsInserted > 0;
                 }), dec);
     }
@@ -63,10 +109,28 @@ public class ClassyfireClassificationService {
     public CompletionStage<Boolean> deleteClassyfireClassification(int classyfireId) {
         return CompletableFuture.supplyAsync(() ->
                 db.withConnection(connection -> {
-                    PreparedStatement statement = connection.prepareStatement(
+                    PreparedStatement firstStatement = connection.prepareStatement(
+                            "SELECT * FROM classyfire_classification_dictionary WHERE classyfire_id = ?");
+                    firstStatement.setInt(1, classyfireId);
+                    ResultSet resultSet = firstStatement.executeQuery();
+                    String nodeId = "";
+                    if (resultSet.next()){
+                        ClassyfireClassificationDictionary classyfireClassificationDictionary = new ClassyfireClassificationDictionary();
+                        classyfireClassificationDictionary.setNodeId(resultSet.getString("node_id"));
+                        nodeId = classyfireClassificationDictionary.getNodeId();
+                    }
+
+                    PreparedStatement secondStatement = connection.prepareStatement(
                             "DELETE FROM classyfire_classification_dictionary WHERE classyfire_id = ?");
-                    statement.setInt(1, classyfireId);
-                    int rowsDeleted = statement.executeUpdate();
+                    secondStatement.setInt(1, classyfireId);
+
+                    int rowsDeleted = secondStatement.executeUpdate();
+                    if (rowsDeleted > 0) {
+                        PreparedStatement classyStatement = connection.prepareStatement(
+                                "DELETE FROM classyfire_classification WHERE node_id = ?");
+                        classyStatement.setString(1, nodeId);
+                        classyStatement.executeUpdate();
+                    }
                     return rowsDeleted > 0;
                 }), dec);
     }
@@ -74,8 +138,17 @@ public class ClassyfireClassificationService {
     public CompletionStage<List<ClassyfireClassificationDictionary>> getAllClassyfireClassifications() {
         return CompletableFuture.supplyAsync(() ->
                 db.withConnection(connection -> {
-                    ResultSet resultSet = connection.createStatement().executeQuery("SELECT * FROM classyfire_classification_dictionary");
+                    PreparedStatement statement = connection.prepareStatement(
+                            "SELECT c.*, " +
+                                    "cl.node_id, cl.kingdom, cl.super_class, cl.main_class, cl.sub_class, cl.direct_parent," +
+                                    "cl.level_7, cl.level_8, cl.level_9, cl.level_10, cl.level_11, cl.created as createdClassyfire, " +
+                                    "cl.last_updated as lastUpdatedClassyfire " +
+                                    "FROM classyfire_classification_dictionary c" +
+                                    "LEFT JOIN classyfire_classification cl ON c.node_id = cl.node_id");
+
+                    ResultSet resultSet = statement.executeQuery();
                     List<ClassyfireClassificationDictionary> classyfireClassificationDictionaries = new ArrayList<>();
+
                     while (resultSet.next()) {
                         ClassyfireClassificationDictionary classyfireClassificationDictionary = new ClassyfireClassificationDictionary();
                         classyfireClassificationDictionary.setClassyfireId(resultSet.getInt("classyfire_id"));
@@ -84,6 +157,19 @@ public class ClassyfireClassificationService {
                         classyfireClassificationDictionary.setCreatedDictionary(resultSet.getString("created"));
                         classyfireClassificationDictionary.setLastUpdatedDictionary(resultSet.getString("last_updated"));
 
+                        /*classyfire_classification_dictionary*/
+                        classyfireClassificationDictionary.setKingdom(resultSet.getString("kingdom"));
+                        classyfireClassificationDictionary.setSuperClass(resultSet.getString("super_class"));
+                        classyfireClassificationDictionary.setMainClass(resultSet.getString("main_class"));
+                        classyfireClassificationDictionary.setSubClass(resultSet.getString("sub_class"));
+                        classyfireClassificationDictionary.setDirectParent(resultSet.getString("direct_parent"));
+                        classyfireClassificationDictionary.setLevel7(resultSet.getString("level_7"));
+                        classyfireClassificationDictionary.setLevel8(resultSet.getString("level_8"));
+                        classyfireClassificationDictionary.setLevel9(resultSet.getString("level_9"));
+                        classyfireClassificationDictionary.setLevel10(resultSet.getString("level_10"));
+                        classyfireClassificationDictionary.setLevel11(resultSet.getString("level_11"));
+                        classyfireClassificationDictionary.setCreated(resultSet.getString("createdClassyfire"));
+                        classyfireClassificationDictionary.setLastUpdated(resultSet.getString("lastUpdatedClassyfire"));
 
                         classyfireClassificationDictionaries.add(classyfireClassificationDictionary);
                     }
@@ -105,6 +191,31 @@ public class ClassyfireClassificationService {
                     statement.setInt(5, classyfireClassificationDictionary.getClassyfireId());
 
                     int rowsUpdated = statement.executeUpdate();
+
+                    /* classyfire_classification_dictionary */
+                    if (classyfireClassificationDictionary.getLastUpdatedDictionary() != null && !classyfireClassificationDictionary.getLastUpdatedDictionary().isEmpty()) {
+                        PreparedStatement classyStatement = connection.prepareStatement(
+                                "UPDATE classyfire_classification SET (node_id, kingdom, super_class, main_class, sub_class, " +
+                                        "direct_parent, level_7, level_8, level_9, level_10, level_11, created, last_updated) " +
+                                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                        classyStatement.setString(1, classyfireClassificationDictionary.getNodeId());
+                        classyStatement.setString(2, classyfireClassificationDictionary.getKingdom());
+                        classyStatement.setString(3, classyfireClassificationDictionary.getSuperClass());
+                        classyStatement.setString(4, classyfireClassificationDictionary.getMainClass());
+                        classyStatement.setString(5, classyfireClassificationDictionary.getSubClass());
+                        classyStatement.setString(6, classyfireClassificationDictionary.getDirectParent());
+                        classyStatement.setString(7, classyfireClassificationDictionary.getLevel7());
+                        classyStatement.setString(8, classyfireClassificationDictionary.getLevel8());
+                        classyStatement.setString(9, classyfireClassificationDictionary.getLevel9());
+                        classyStatement.setString(10, classyfireClassificationDictionary.getLevel10());
+                        classyStatement.setString(11, classyfireClassificationDictionary.getLevel11());
+                        classyStatement.setString(12, classyfireClassificationDictionary.getCreated());
+                        classyStatement.setString(13, classyfireClassificationDictionary.getLastUpdated());
+                        int classyRowsInserted = classyStatement.executeUpdate();
+                        if (classyRowsInserted == 0) {
+                            return false;
+                        }
+                    }
                     return rowsUpdated > 0;
                 }), dec);
     }
@@ -113,7 +224,13 @@ public class ClassyfireClassificationService {
         return CompletableFuture.supplyAsync(() ->
                 db.withConnection(connection -> {
                     PreparedStatement statement = connection.prepareStatement(
-                            "SELECT * FROM classyfire_classification_dictionary WHERE classyfire_id >= ? AND classyfire_id <= ?");
+                            "SELECT c.*, " +
+                                    "cl.node_id, cl.kingdom, cl.super_class, cl.main_class, cl.sub_class, cl.direct_parent," +
+                                    "cl.level_7, cl.level_8, cl.level_9, cl.level_10, cl.level_11, cl.created as createdClassyfire, " +
+                                    "cl.last_updated as lastUpdatedClassyfire " +
+                                    "FROM classyfire_classification_dictionary c" +
+                                    "LEFT JOIN classyfire_classification cl ON c.node_id = cl.node_id " +
+                                    "WHERE c.classyfire_id BETWEEN ? AND ?");
                     statement.setInt(1, startId);
                     statement.setInt(2, endId);
                     ResultSet resultSet = statement.executeQuery();
@@ -126,6 +243,20 @@ public class ClassyfireClassificationService {
                         classyfireClassificationDictionary.setNodeName(resultSet.getString("node_name"));
                         classyfireClassificationDictionary.setCreatedDictionary(resultSet.getString("created"));
                         classyfireClassificationDictionary.setLastUpdatedDictionary(resultSet.getString("last_updated"));
+
+                        /*classyfire_classification_dictionary*/
+                        classyfireClassificationDictionary.setKingdom(resultSet.getString("kingdom"));
+                        classyfireClassificationDictionary.setSuperClass(resultSet.getString("super_class"));
+                        classyfireClassificationDictionary.setMainClass(resultSet.getString("main_class"));
+                        classyfireClassificationDictionary.setSubClass(resultSet.getString("sub_class"));
+                        classyfireClassificationDictionary.setDirectParent(resultSet.getString("direct_parent"));
+                        classyfireClassificationDictionary.setLevel7(resultSet.getString("level_7"));
+                        classyfireClassificationDictionary.setLevel8(resultSet.getString("level_8"));
+                        classyfireClassificationDictionary.setLevel9(resultSet.getString("level_9"));
+                        classyfireClassificationDictionary.setLevel10(resultSet.getString("level_10"));
+                        classyfireClassificationDictionary.setLevel11(resultSet.getString("level_11"));
+                        classyfireClassificationDictionary.setCreated(resultSet.getString("createdClassyfire"));
+                        classyfireClassificationDictionary.setLastUpdated(resultSet.getString("lastUpdatedClassyfire"));
 
                         classyfireClassificationsInRangeDictionary.add(classyfireClassificationDictionary);
                     }

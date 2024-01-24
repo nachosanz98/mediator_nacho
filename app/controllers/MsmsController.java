@@ -168,6 +168,34 @@ public class MsmsController extends Controller {
                     case "lastUpdated":
                         existingMsms.setLastUpdated(fieldValue.asText());
                         break;
+                    case "peak_id":
+                        existingMsms.setPeakId(fieldValue.asInt());
+                        break;
+                    case "intensity":
+                        existingMsms.setIntensity(fieldValue.asDouble());
+                    case "mz":
+                        existingMsms.setMz(fieldValue.asDouble());
+                    case "createdPeak":
+                        existingMsms.setCreatedPeak(fieldValue.asText());
+                        break;
+                    case "lastUpdatedPeak":
+                        existingMsms.setLastUpdatedPeak(fieldValue.asText());
+                        break;
+                    case "reference_id":
+                        existingMsms.setReferenceId(fieldValue.asInt());
+                        break;
+                    case "pubmed_id":
+                        existingMsms.setPubmedId(fieldValue.asText());
+                        break;
+                    case "ref_text":
+                        existingMsms.setRefText(fieldValue.asText());
+                        break;
+                    case "createdRef":
+                        existingMsms.setCreatedRef(fieldValue.asText());
+                        break;
+                    case "lastUpdatedRef":
+                        existingMsms.setLastUpdatedRef(fieldValue.asText());
+                        break;
                     default:
                         break;
                 }

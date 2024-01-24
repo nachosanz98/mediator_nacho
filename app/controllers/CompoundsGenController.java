@@ -167,6 +167,19 @@ public class CompoundsGenController {
                     case "lastUpdated":
                         existingCompoundsGen.setLastUpdated(fieldValue.asText());
                         break;
+                    case "inchi":
+                        existingCompoundsGen.setInchi(fieldValue.asText());
+                    case "inchi_key":
+                        existingCompoundsGen.setInchiKey(fieldValue.asText());
+                    case "smiles":
+                        existingCompoundsGen.setSmiles(fieldValue.asText());
+                        break;
+                    case "createdIdentifier":
+                        existingCompoundsGen.setCreatedIden(fieldValue.asText());
+                        break;
+                    case "lastUpdatedIdentifier":
+                        existingCompoundsGen.setLastUpdatedIden(fieldValue.asText());
+                        break;
                     default:
                         break;
                 }

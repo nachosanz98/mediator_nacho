@@ -32,8 +32,6 @@ public class CompoundService {
                         "ci.inchi, ci.inchi_key, ci.smiles, ci.created as createdIdentifier, ci.last_updated as lastUpdatedIdentifier, " +
                         "ca.agilent_id, ca.created as createdAgilent, ca.last_updated as lastUpdatedAgilent, " +
                         "ch.chebi_id, ch.created as createdChebi, ch.last_updated as lastUpdatedChebi, " +
-                        "cg.MINE_id, cg.MINE_file_id, cg.compound_name, cg.formula, cg.mass, cg.charge_type, " +
-                            "cg.np_likeness, cg.formula_type, cg.formula_type_int, cg.created as createdGen, cg.last_updated as lastUpdatedGen, " +
                         "chm.hmdb_id, chm.created as createdHmdb, chm.last_updated as lastUpdatedHmdb, " +
                         "cih.in_house_id, cih.source_data, cih.description, cih.created as createdInHouse, cih.last_updated as lastUpdatedInHouse, " +
                         "ck.kegg_id, ck.created as createdKegg, ck.last_updated as lastUpdatedKegg, " +
@@ -569,7 +567,7 @@ public class CompoundService {
 
                     int rowsUpdated = statement.executeUpdate();
 
-                    if (compound.getLastUpdated() != null && !compound.getLastUpdatedIdentifier().isEmpty()) {
+                    if (compound.getLastUpdatedIdentifier() != null && !compound.getLastUpdatedIdentifier().isEmpty()) {
                         PreparedStatement identStatement = connection.prepareStatement(
                                 "UPDATE compound_identifiers SET inchi = ?, inchi_key = ?, smiles = ?, created = ?, last_updated = ? " +
                                         "WHERE compound_id = ?");
