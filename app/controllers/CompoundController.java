@@ -201,21 +201,6 @@ public class CompoundController extends Controller {
                     case "lastUpdatedChebi":
                         existingCompound.setLastUpdatedChebi(fieldValue.asText());
                         break;
-                    case "mineID":
-                        existingCompound.setMineID(fieldValue.asInt());
-                        break;
-                    case "mineFileID":
-                        existingCompound.setMineFileID(fieldValue.asText());
-                        break;
-                    case "npLikeness":
-                        existingCompound.setNpLikeness(fieldValue.asDouble());
-                        break;
-                    case "createdGen":
-                        existingCompound.setCreatedGen(fieldValue.asText());
-                        break;
-                    case "lastUpdatedGen":
-                        existingCompound.setLastUpdatedGen(fieldValue.asText());
-                        break;
                     case "hmdbId":
                         existingCompound.setHmdbId(fieldValue.asText());
                         break;

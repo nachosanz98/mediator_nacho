@@ -47,7 +47,6 @@ public class CompoundService {
                         "LEFT JOIN compound_identifiers ci ON c.compound_id = ci.compound_id " +
                         "LEFT JOIN compounds_agilent ca ON c.compound_id = ca.compound_id " +
                         "LEFT JOIN compounds_chebi ch ON c.compound_id = ch.compound_id " +
-                        "LEFT JOIN compounds_gen cg ON c.compound_id = cg.compound_id " +
                         "LEFT JOIN compounds_hmdb chm ON c.compound_id = chm.compound_id " +
                         "LEFT JOIN compounds_in_house cih ON c.compound_id = cih.compound_id " +
                         "LEFT JOIN compounds_kegg ck ON c.compound_id = ck.compound_id " +
@@ -93,13 +92,6 @@ public class CompoundService {
                         compound.setChebiId(resultSet.getInt("chebi_id"));
                         compound.setCreatedChebi(resultSet.getString("createdChebi"));
                         compound.setLastUpdatedChebi(resultSet.getString("lastUpdatedChebi"));
-
-                        /*compounds_gen*/
-                        compound.setMineID(resultSet.getInt("MINE_id"));
-                        compound.setMineFileID(resultSet.getString("MINE_file_id"));
-                        compound.setNpLikeness(resultSet.getDouble("np_likeness"));
-                        compound.setCreatedGen(resultSet.getString("createdGen"));
-                        compound.setLastUpdatedGen(resultSet.getString("lastUpdatedGen"));
 
                         /*compounds_hmdb*/
                         compound.setHmdbId(resultSet.getString("hmdb_id"));
@@ -228,32 +220,6 @@ public class CompoundService {
                         chebiStatement.setString(4, compound.getLastUpdatedChebi());
                         int chebiRowsInserted = chebiStatement.executeUpdate();
                         if (chebiRowsInserted == 0) {
-                            return false;
-                        }
-                    }
-
-                    /* compounds_gen */
-                    if (rowsInserted > 0 && !compound.getCreatedGen().isEmpty()) {
-                        PreparedStatement genStatement = connection.prepareStatement(
-                                "INSERT INTO compounds_gen (compound_id, MINE_id, MINE_file_id, compound_name, formula, mass, " +
-                                        "charge_type, charge_number, np_likeness, formula_type, formula_type_int, " +
-                                        "created, last_updated) " +
-                                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                        genStatement.setInt(1, generatedCompoundId);
-                        genStatement.setInt(2, compound.getMineID());
-                        genStatement.setString(3, compound.getMineFileID());
-                        genStatement.setString(4, compound.getCompoundName());
-                        genStatement.setString(5, compound.getFormula());
-                        genStatement.setDouble(6, compound.getMass());
-                        genStatement.setInt(7, compound.getChargeType());
-                        genStatement.setInt(8, compound.getChargeNumber());
-                        genStatement.setDouble(9, compound.getNpLikeness());
-                        genStatement.setString(10, compound.getFormulaType());
-                        genStatement.setInt(11, compound.getFormulaTypeInt());
-                        genStatement.setString(12, compound.getCreatedGen());
-                        genStatement.setString(13, compound.getLastUpdatedGen());
-                        int genRowsInserted = genStatement.executeUpdate();
-                        if (genRowsInserted == 0) {
                             return false;
                         }
                     }
@@ -413,11 +379,6 @@ public class CompoundService {
                         chebiStatement.setInt(1, compoundId);
                         chebiStatement.executeUpdate();
 
-                        PreparedStatement genStatement = connection.prepareStatement(
-                                "DELETE FROM compounds_gen WHERE compound_id = ?");
-                        genStatement.setInt(1, compoundId);
-                        genStatement.executeUpdate();
-
                         PreparedStatement hmdbStatement = connection.prepareStatement(
                                 "DELETE FROM compounds_hmdb WHERE compound_id = ?");
                         hmdbStatement.setInt(1, compoundId);
@@ -470,8 +431,6 @@ public class CompoundService {
                         "ci.inchi, ci.inchi_key, ci.smiles, ci.created as createdIdentifier, ci.last_updated as lastUpdatedIdentifier, " +
                         "ca.agilent_id, ca.created as createdAgilent, ca.last_updated as lastUpdatedAgilent, " +
                         "ch.chebi_id, ch.created as createdChebi, ch.last_updated as lastUpdatedChebi, " +
-                        "cg.MINE_id, cg.MINE_file_id, cg.compound_name, cg.formula, cg.mass, cg.charge_type, " +
-                        "cg.np_likeness, cg.formula_type, cg.formula_type_int, cg.created as createdGen, cg.last_updated as lastUpdatedGen, " +
                         "chm.hmdb_id, chm.created as createdHmdb, chm.last_updated as lastUpdatedHmdb, " +
                         "cih.in_house_id, cih.source_data, cih.description, cih.created as createdInHouse, cih.last_updated as lastUpdatedInHouse, " +
                         "ck.kegg_id, ck.created as createdKegg, ck.last_updated as lastUpdatedKegg, " +
@@ -485,7 +444,6 @@ public class CompoundService {
                         "LEFT JOIN compound_identifiers ci ON c.compound_id = ci.compound_id " +
                         "LEFT JOIN compounds_agilent ca ON c.compound_id = ca.compound_id " +
                         "LEFT JOIN compounds_chebi ch ON c.compound_id = ch.compound_id " +
-                        "LEFT JOIN compounds_gen cg ON c.compound_id = cg.compound_id " +
                         "LEFT JOIN compounds_hmdb chm ON c.compound_id = chm.compound_id " +
                         "LEFT JOIN compounds_in_house cih ON c.compound_id = cih.compound_id " +
                         "LEFT JOIN compounds_kegg ck ON c.compound_id = ck.compound_id " +
@@ -530,13 +488,6 @@ public class CompoundService {
                         compound.setChebiId(resultSet.getInt("chebi_id"));
                         compound.setCreatedChebi(resultSet.getString("createdChebi"));
                         compound.setLastUpdatedChebi(resultSet.getString("lastUpdatedChebi"));
-
-                        /*compounds_gen*/
-                        compound.setMineID(resultSet.getInt("MINE_id"));
-                        compound.setMineFileID(resultSet.getString("MINE_file_id"));
-                        compound.setNpLikeness(resultSet.getDouble("np_likeness"));
-                        compound.setCreatedGen(resultSet.getString("createdGen"));
-                        compound.setLastUpdatedGen(resultSet.getString("lastUpdatedGen"));
 
                         /*compounds_hmdb*/
                         compound.setHmdbId(resultSet.getString("hmdb_id"));
@@ -656,29 +607,6 @@ public class CompoundService {
                         chebiStatement.setInt(4, id);
                         int chebiRowsUpdated = chebiStatement.executeUpdate();
                         if (chebiRowsUpdated == 0) {
-                            return false;
-                        }
-                    }
-
-                    if (compound.getLastUpdatedGen() != null && !compound.getLastUpdatedGen().isEmpty()) {
-                        PreparedStatement genStatement = connection.prepareStatement(
-                                "UPDATE compounds_gen SET MINE_id = ?, compound_name = ?, formula = ?, mass = ?, charge_type = ?, " +
-                                        "charge_number = ?, np_likeness = ?, formula_type = ?, formula_type_int = ?, " +
-                                        "created = ?, last_updated = ? WHERE compound_id = ?");
-                        genStatement.setInt(1, compound.getMineID());
-                        genStatement.setString(2, compound.getCompoundName());
-                        genStatement.setString(3, compound.getFormula());
-                        genStatement.setDouble(4, compound.getMass());
-                        genStatement.setInt(5, compound.getChargeType());
-                        genStatement.setInt(6, compound.getChargeNumber());
-                        genStatement.setDouble(7, compound.getNpLikeness());
-                        genStatement.setString(8, compound.getFormulaType());
-                        genStatement.setInt(9, compound.getFormulaTypeInt());
-                        genStatement.setString(10, compound.getCreatedGen());
-                        genStatement.setString(11, compound.getLastUpdatedGen());
-                        genStatement.setInt(12, id);
-                        int genRowsUpdated = genStatement.executeUpdate();
-                        if (genRowsUpdated == 0) {
                             return false;
                         }
                     }
@@ -809,8 +737,6 @@ public class CompoundService {
                             "ci.inchi, ci.inchi_key, ci.smiles, ci.created as createdIdentifier, ci.last_updated as lastUpdatedIdentifier, " +
                             "ca.agilent_id, ca.created as createdAgilent, ca.last_updated as lastUpdatedAgilent, " +
                             "ch.chebi_id, ch.created as createdChebi, ch.last_updated as lastUpdatedChebi, " +
-                            "cg.MINE_id, cg.MINE_file_id, cg.compound_name, cg.formula, cg.mass, cg.charge_type, " +
-                            "cg.np_likeness, cg.formula_type, cg.formula_type_int, cg.created as createdGen, cg.last_updated as lastUpdatedGen, " +
                             "chm.hmdb_id, chm.created as createdHmdb, chm.last_updated as lastUpdatedHmdb, " +
                             "cih.in_house_id, cih.source_data, cih.description, cih.created as createdInHouse, cih.last_updated as lastUpdatedInHouse, " +
                             "ck.kegg_id, ck.created as createdKegg, ck.last_updated as lastUpdatedKegg, " +
@@ -824,7 +750,6 @@ public class CompoundService {
                             "LEFT JOIN compound_identifiers ci ON c.compound_id = ci.compound_id " +
                             "LEFT JOIN compounds_agilent ca ON c.compound_id = ca.compound_id " +
                             "LEFT JOIN compounds_chebi ch ON c.compound_id = ch.compound_id " +
-                            "LEFT JOIN compounds_gen cg ON c.compound_id = cg.compound_id " +
                             "LEFT JOIN compounds_hmdb chm ON c.compound_id = chm.compound_id " +
                             "LEFT JOIN compounds_in_house cih ON c.compound_id = cih.compound_id " +
                             "LEFT JOIN compounds_kegg ck ON c.compound_id = ck.compound_id " +
@@ -872,13 +797,6 @@ public class CompoundService {
                         compound.setChebiId(resultSet.getInt("chebi_id"));
                         compound.setCreatedChebi(resultSet.getString("createdChebi"));
                         compound.setLastUpdatedChebi(resultSet.getString("lastUpdatedChebi"));
-
-                        /*compounds_gen*/
-                        compound.setMineID(resultSet.getInt("MINE_id"));
-                        compound.setMineFileID(resultSet.getString("MINE_file_id"));
-                        compound.setNpLikeness(resultSet.getDouble("np_likeness"));
-                        compound.setCreatedGen(resultSet.getString("createdGen"));
-                        compound.setLastUpdatedGen(resultSet.getString("lastUpdatedGen"));
 
                         /*compounds_hmdb*/
                         compound.setHmdbId(resultSet.getString("hmdb_id"));

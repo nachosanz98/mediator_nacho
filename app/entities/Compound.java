@@ -34,13 +34,6 @@ public class Compound {
     private String createdChebi;
     private String lastUpdatedChebi;
 
-    /* compound_gen */
-    private int mineID;
-    private String mineFileID;
-    private Double npLikeness;
-    private String createdGen;
-    private String lastUpdatedGen;
-
     /* compound_hmdb */
     private String hmdbId;
     private String createdHmdb;
@@ -117,11 +110,6 @@ public class Compound {
         this.chebiId = 0;
         this.createdChebi = "";
         this.lastUpdatedChebi = "";
-        this.mineID = 0;
-        this.mineFileID = "";
-        this.npLikeness = 0.0;
-        this.createdGen = "";
-        this.lastUpdatedGen = "";
         this.hmdbId = "";
         this.createdHmdb = "";
         this.lastUpdatedHmdb = "";
@@ -162,7 +150,6 @@ public class Compound {
                     String smiles, String createdIdentifier, String lastUpdatedIdentifier,
                     int agilent_id, String createdAgilent, String lastUpdatedAgilent,
                     int chebiId, String createdChebi, String lastUpdatedChebi,
-                    int mineID, String mineFileID, Double npLikeness, String createdGen, String lastUpdatedGen,
                     String hmdbId, String createdHmdb, String lastUpdatedHmdb,
                     int inHouseID, String sourceData, String description, String createdInHouse, String lastUpdatedInHouse,
                     String keggId, String createdKegg, String lastUpdatedKegg,
@@ -196,11 +183,6 @@ public class Compound {
         this.chebiId = chebiId;
         this.createdChebi = createdChebi;
         this.lastUpdatedChebi = lastUpdatedChebi;
-        this.mineID = mineID;
-        this.mineFileID = mineFileID;
-        this.npLikeness = npLikeness;
-        this.createdGen = createdGen;
-        this.lastUpdatedGen = lastUpdatedGen;
         this.hmdbId = hmdbId;
         this.createdHmdb = createdHmdb;
         this.lastUpdatedHmdb = lastUpdatedHmdb;
@@ -431,46 +413,6 @@ public class Compound {
 
     public void setLastUpdatedChebi(String lastUpdatedChebi) {
         this.lastUpdatedChebi = lastUpdatedChebi;
-    }
-
-    public int getMineID() {
-        return mineID;
-    }
-
-    public void setMineID(int mineID) {
-        this.mineID = mineID;
-    }
-
-    public String getMineFileID() {
-        return mineFileID;
-    }
-
-    public void setMineFileID(String mineFileID) {
-        this.mineFileID = mineFileID;
-    }
-
-    public Double getNpLikeness() {
-        return npLikeness;
-    }
-
-    public void setNpLikeness(Double npLikeness) {
-        this.npLikeness = npLikeness;
-    }
-
-    public String getCreatedGen() {
-        return createdGen;
-    }
-
-    public void setCreatedGen(String createdGen) {
-        this.createdGen = createdGen;
-    }
-
-    public String getLastUpdatedGen() {
-        return lastUpdatedGen;
-    }
-
-    public void setLastUpdatedGen(String lastUpdatedGen) {
-        this.lastUpdatedGen = lastUpdatedGen;
     }
 
     public String getHmdbId() {
@@ -756,11 +698,6 @@ public class Compound {
                 ", chebiId=" + chebiId + '\'' +
                 ", createdChebi='" + createdChebi + '\'' +
                 ", lastUpdatedChebi='" + lastUpdatedChebi + '\'' +
-                ", mineID=" + mineID + '\'' +
-                ", mineFileID='" + mineFileID + '\'' +
-                ", npLikeness=" + npLikeness + '\'' +
-                ", createdGen='" + createdGen + '\'' +
-                ", lastUpdatedGen='" + lastUpdatedGen + '\'' +
                 ", hmdbId=" + hmdbId + '\'' +
                 ", createdHmdb='" + createdHmdb + '\'' +
                 ", lastUpdatedHmdb='" + lastUpdatedHmdb + '\'' +
