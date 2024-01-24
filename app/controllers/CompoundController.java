@@ -170,6 +170,10 @@ public class CompoundController extends Controller {
                     case "logP":
                         existingCompound.setLogP(fieldValue.asDouble());
                         break;
+                    case "inchi":
+                        existingCompound.setInchi(fieldValue.asText());
+                    case "inchi_key":
+                        existingCompound.setInchiKey(fieldValue.asText());
                     case "smiles":
                         existingCompound.setSmiles(fieldValue.asText());
                         break;
@@ -213,7 +217,7 @@ public class CompoundController extends Controller {
                         existingCompound.setLastUpdatedGen(fieldValue.asText());
                         break;
                     case "hmdbId":
-                        existingCompound.setHmdbId(fieldValue.asInt());
+                        existingCompound.setHmdbId(fieldValue.asText());
                         break;
                     case "createdHmdb":
                         existingCompound.setCreatedHmdb(fieldValue.asText());
@@ -237,7 +241,7 @@ public class CompoundController extends Controller {
                         existingCompound.setLastUpdatedInHouse(fieldValue.asText());
                         break;
                     case "keggId":
-                        existingCompound.setKeggId(fieldValue.asInt());
+                        existingCompound.setKeggId(fieldValue.asText());
                         break;
                     case "createdKegg":
                         existingCompound.setCreatedKegg(fieldValue.asText());
@@ -264,7 +268,7 @@ public class CompoundController extends Controller {
                         existingCompound.setLastUpdatedLipid(fieldValue.asText());
                         break;
                     case "lmId":
-                        existingCompound.setLmId(fieldValue.asInt());
+                        existingCompound.setLmId(fieldValue.asText());
                         break;
                     case "createdLm":
                         existingCompound.setCreatedLm(fieldValue.asText());
@@ -300,7 +304,7 @@ public class CompoundController extends Controller {
                         existingCompound.setLastUpdatedPc(fieldValue.asText());
                         break;
                     case "reactionId":
-                        existingCompound.setReactionId(fieldValue.asInt());
+                        existingCompound.setReactionId(fieldValue.asText());
                         break;
                     case "createdReaction":
                         existingCompound.setCreatedReaction(fieldValue.asText());

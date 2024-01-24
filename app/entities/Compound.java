@@ -18,6 +18,8 @@ public class Compound {
     private Double logP;
 
     /* compound_identifiers */
+    private String inchi;
+    private String inchiKey;
     private String smiles;
     private String createdIdentifier;
     private String lastUpdatedIdentifier;
@@ -40,7 +42,7 @@ public class Compound {
     private String lastUpdatedGen;
 
     /* compound_hmdb */
-    private int hmdbId;
+    private String hmdbId;
     private String createdHmdb;
     private String lastUpdatedHmdb;
 
@@ -52,7 +54,7 @@ public class Compound {
     private String lastUpdatedInHouse;
 
     /* compound_kegg */
-    private int keggId;
+    private String keggId;
     private String createdKegg;
     private String lastUpdatedKegg;
 
@@ -65,7 +67,7 @@ public class Compound {
     private String lastUpdatedLipid;
 
     /* compound_lm */
-    private int lmId;
+    private String lmId;
     private String createdLm;
     private String lastUpdatedLm;
 
@@ -83,7 +85,7 @@ public class Compound {
     private String lastUpdatedPc;
 
     /* compound_reactions_kegg */
-    private int reactionId;
+    private String reactionId;
     private String createdReaction;
     private String lastUpdatedReaction;
 
@@ -104,6 +106,8 @@ public class Compound {
         this.lastUpdated = "";
         this.formulaTypeInt = 0;
         this.logP = 0.0;
+        this.inchi = "";
+        this.inchiKey = "";
         this.smiles = "";
         this.createdIdentifier = "";
         this.lastUpdatedIdentifier = "";
@@ -118,7 +122,7 @@ public class Compound {
         this.npLikeness = 0.0;
         this.createdGen = "";
         this.lastUpdatedGen = "";
-        this.hmdbId = 0;
+        this.hmdbId = "";
         this.createdHmdb = "";
         this.lastUpdatedHmdb = "";
         this.inHouseID = 0;
@@ -126,7 +130,7 @@ public class Compound {
         this.description = "";
         this.createdInHouse = "";
         this.lastUpdatedInHouse = "";
-        this.keggId = 0;
+        this.keggId = "";
         this.createdKegg = "";
         this.lastUpdatedKegg = "";
         this.lipidType = "";
@@ -135,7 +139,7 @@ public class Compound {
         this.doubleBonds = 0;
         this.createdLipid = "";
         this.lastUpdatedLipid = "";
-        this.lmId = 0;
+        this.lmId = "";
         this.createdLm = "";
         this.lastUpdatedLm = "";
         this.category = "";
@@ -147,7 +151,7 @@ public class Compound {
         this.pcId = 0;
         this.createdPc = "";
         this.lastUpdatedPc = "";
-        this.reactionId = 0;
+        this.reactionId = "";
         this.createdReaction = "";
         this.lastUpdatedReaction = "";
     }
@@ -157,17 +161,16 @@ public class Compound {
                     String lastUpdated, int formulaTypeInt, Double logP,
                     String smiles, String createdIdentifier, String lastUpdatedIdentifier,
                     int agilent_id, String createdAgilent, String lastUpdatedAgilent,
-                    String inchi, String inchiKey, String createdCas, String lastUpdatedCas,
                     int chebiId, String createdChebi, String lastUpdatedChebi,
                     int mineID, String mineFileID, Double npLikeness, String createdGen, String lastUpdatedGen,
-                    int hmdbId, String createdHmdb, String lastUpdatedHmdb,
+                    String hmdbId, String createdHmdb, String lastUpdatedHmdb,
                     int inHouseID, String sourceData, String description, String createdInHouse, String lastUpdatedInHouse,
-                    int keggId, String createdKegg, String lastUpdatedKegg,
+                    String keggId, String createdKegg, String lastUpdatedKegg,
                     String lipidType, Integer numChains, Integer numCarbons, Integer doubleBonds, String createdLipid, String lastUpdatedLipid,
-                    int lmId, String createdLm, String lastUpdatedLm,
+                    String lmId, String createdLm, String lastUpdatedLm,
                     String category, String mainClass, String subClass, String classLevel4, String createdLmClassification, String lastUpdatedLmClassification,
                     int pcId, String createdPc, String lastUpdatedPc,
-                    int reactionId, String createdReaction, String lastUpdatedReaction) {
+                    String reactionId, String createdReaction, String lastUpdatedReaction) {
         this.compoundId = compoundId;
         this.casId = casId;
         this.compoundName = compoundName;
@@ -182,6 +185,8 @@ public class Compound {
         this.lastUpdated = lastUpdated;
         this.formulaTypeInt = formulaTypeInt;
         this.logP = logP;
+        this.inchi = inchi;
+        this.inchiKey = inchiKey;
         this.smiles = smiles;
         this.createdIdentifier = createdIdentifier;
         this.lastUpdatedIdentifier = lastUpdatedIdentifier;
@@ -342,6 +347,20 @@ public class Compound {
     public void setLogP(Double logP) {
         this.logP = logP;
     }
+    public String getInchi() {
+        return inchi;
+    }
+
+    public void setInchi(String inchi) {
+        this.inchi = inchi;
+    }
+    public String getInchiKey() {
+        return inchiKey;
+    }
+
+    public void setInchiKey(String inchiKey) {
+        this.inchiKey = inchiKey;
+    }
     public String getSmiles() {
         return smiles;
     }
@@ -389,10 +408,6 @@ public class Compound {
     public void setLastUpdatedAgilent(String lastUpdatedAgilent) {
         this.lastUpdatedAgilent = lastUpdatedAgilent;
     }
-
-
-
-
 
     public int getChebiId() {
         return chebiId;
@@ -458,11 +473,11 @@ public class Compound {
         this.lastUpdatedGen = lastUpdatedGen;
     }
 
-    public int getHmdbId() {
+    public String getHmdbId() {
         return hmdbId;
     }
 
-    public void setHmdbId(int hmdbId) {
+    public void setHmdbId(String hmdbId) {
         this.hmdbId = hmdbId;
     }
 
@@ -522,11 +537,11 @@ public class Compound {
         this.lastUpdatedInHouse = lastUpdatedInHouse;
     }
 
-    public int getKeggId() {
+    public String getKeggId() {
         return keggId;
     }
 
-    public void setKeggId(int keggId) {
+    public void setKeggId(String keggId) {
         this.keggId = keggId;
     }
 
@@ -594,11 +609,11 @@ public class Compound {
         this.lastUpdatedLipid = lastUpdatedLipid;
     }
 
-    public int getLmId() {
+    public String getLmId() {
         return lmId;
     }
 
-    public void setLmId(int lmId) {
+    public void setLmId(String lmId) {
         this.lmId = lmId;
     }
 
@@ -690,11 +705,11 @@ public class Compound {
         this.lastUpdatedPc = lastUpdatedPc;
     }
 
-    public int getReactionId() {
+    public String getReactionId() {
         return reactionId;
     }
 
-    public void setReactionId(int reactionId) {
+    public void setReactionId(String reactionId) {
         this.reactionId = reactionId;
     }
 
@@ -716,52 +731,54 @@ public class Compound {
     @Override
     public String toString() {
         return "Compound{" +
-                "compoundId=" + compoundId +
+                "compoundId=" + compoundId + '\'' +
                 ", casId='" + casId + '\'' +
                 ", compoundName='" + compoundName + '\'' +
                 ", formula='" + formula + '\'' +
-                ", mass=" + mass +
-                ", chargeType=" + chargeType +
-                ", chargeNumber=" + chargeNumber +
+                ", mass=" + mass + '\'' +
+                ", chargeType=" + chargeType + '\'' +
+                ", chargeNumber=" + chargeNumber + '\'' +
                 ", formulaType='" + formulaType + '\'' +
-                ", compoundType=" + compoundType +
-                ", compoundStatus=" + compoundStatus +
+                ", compoundType=" + compoundType + '\'' +
+                ", compoundStatus=" + compoundStatus + '\'' +
                 ", created='" + created + '\'' +
                 ", lastUpdated='" + lastUpdated + '\'' +
-                ", formulaTypeInt=" + formulaTypeInt +
-                ", logP=" + logP +
+                ", formulaTypeInt=" + formulaTypeInt + '\'' +
+                ", logP=" + logP + '\'' +
+                ", inchi='" + inchi + '\'' +
+                ", inchi_key='" + inchiKey + '\'' +
                 ", smiles='" + smiles + '\'' +
                 ", createdIdentifier='" + createdIdentifier + '\'' +
                 ", lastUpdatedIdentifier='" + lastUpdatedIdentifier + '\'' +
-                ", agilent_id=" + agilent_id +
+                ", agilent_id=" + agilent_id + '\'' +
                 ", createdAgilent='" + createdAgilent + '\'' +
                 ", lastUpdatedAgilent='" + lastUpdatedAgilent + '\'' +
-                ", chebiId=" + chebiId +
+                ", chebiId=" + chebiId + '\'' +
                 ", createdChebi='" + createdChebi + '\'' +
                 ", lastUpdatedChebi='" + lastUpdatedChebi + '\'' +
-                ", mineID=" + mineID +
+                ", mineID=" + mineID + '\'' +
                 ", mineFileID='" + mineFileID + '\'' +
-                ", npLikeness=" + npLikeness +
+                ", npLikeness=" + npLikeness + '\'' +
                 ", createdGen='" + createdGen + '\'' +
                 ", lastUpdatedGen='" + lastUpdatedGen + '\'' +
-                ", hmdbId=" + hmdbId +
+                ", hmdbId=" + hmdbId + '\'' +
                 ", createdHmdb='" + createdHmdb + '\'' +
                 ", lastUpdatedHmdb='" + lastUpdatedHmdb + '\'' +
-                ", inHouseID=" + inHouseID +
+                ", inHouseID=" + inHouseID + '\'' +
                 ", sourceData='" + sourceData + '\'' +
                 ", description='" + description + '\'' +
                 ", createdInHouse='" + createdInHouse + '\'' +
                 ", lastUpdatedInHouse='" + lastUpdatedInHouse + '\'' +
-                ", keggId=" + keggId +
+                ", keggId=" + keggId + '\'' +
                 ", createdKegg='" + createdKegg + '\'' +
                 ", lastUpdatedKegg='" + lastUpdatedKegg + '\'' +
                 ", lipidType='" + lipidType + '\'' +
-                ", numChains=" + numChains +
-                ", numCarbons=" + numCarbons +
-                ", doubleBonds=" + doubleBonds +
+                ", numChains=" + numChains + '\'' +
+                ", numCarbons=" + numCarbons + '\'' +
+                ", doubleBonds=" + doubleBonds + '\'' +
                 ", createdLipid='" + createdLipid + '\'' +
                 ", lastUpdatedLipid='" + lastUpdatedLipid + '\'' +
-                ", lmId=" + lmId +
+                ", lmId=" + lmId + '\'' +
                 ", createdLm='" + createdLm + '\'' +
                 ", lastUpdatedLm='" + lastUpdatedLm + '\'' +
                 ", category='" + category + '\'' +
@@ -770,12 +787,12 @@ public class Compound {
                 ", classLevel4='" + classLevel4 + '\'' +
                 ", createdLmClassification='" + createdLmClassification + '\'' +
                 ", lastUpdatedLmClassification='" + lastUpdatedLmClassification + '\'' +
-                ", pcId=" + pcId +
+                ", pcId=" + pcId + '\'' +
                 ", createdPc='" + createdPc + '\'' +
                 ", lastUpdatedPc='" + lastUpdatedPc + '\'' +
-                ", reactionId=" + reactionId +
+                ", reactionId=" + reactionId + '\'' +
                 ", createdReaction='" + createdReaction + '\'' +
-                ", lastUpdatedReaction='" + lastUpdatedReaction + '\'' +
+                ", lastUpdatedReaction='" + lastUpdatedReaction +
                 '}';
     }
 }
