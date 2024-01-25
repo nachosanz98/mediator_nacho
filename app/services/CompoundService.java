@@ -176,7 +176,7 @@ public class CompoundService {
                     }
 
                     /* compound_identifiers */
-                    if (rowsInserted > 0 && !compound.getCreatedIdentifier().isEmpty()) {
+                    if (rowsInserted > 0 && !compound.getCreatedIdentifier().isEmpty() && compound.getCreatedIdentifier() != null) {
                         PreparedStatement identStatement = connection.prepareStatement(
                                 "INSERT INTO compound_identifiers (compound_id, inchi, inchi_key, smiles, created, last_updated) " +
                                         "VALUES (?, ?, ?, ?, ?, ?)");
@@ -193,7 +193,7 @@ public class CompoundService {
                     }
 
                     /* compounds_agilent */
-                    if (rowsInserted > 0 && !compound.getCreatedAgilent().isEmpty()) {
+                    if (rowsInserted > 0 && !compound.getCreatedAgilent().isEmpty() && compound.getCreatedAgilent() != null) {
                         PreparedStatement agilentStatement = connection.prepareStatement(
                                 "INSERT INTO compounds_agilent (compound_id, agilent_id, created, last_updated) " +
                                         "VALUES (?, ?, ?, ?)");
@@ -208,7 +208,7 @@ public class CompoundService {
                     }
 
                     /* compounds_chebi */
-                    if (rowsInserted > 0 && !compound.getCreatedChebi().isEmpty()) {
+                    if (rowsInserted > 0 && !compound.getCreatedChebi().isEmpty() && compound.getCreatedChebi() != null) {
                         PreparedStatement chebiStatement = connection.prepareStatement(
                                 "INSERT INTO compounds_chebi (compound_id, chebi_id, created, last_updated) " +
                                         "VALUES (?, ?, ?, ?)");
@@ -223,7 +223,7 @@ public class CompoundService {
                     }
 
                     /* compounds_hmdb */
-                    if (rowsInserted > 0 && !compound.getCreatedHmdb().isEmpty()) {
+                    if (rowsInserted > 0 && !compound.getCreatedHmdb().isEmpty() && compound.getCreatedHmdb() != null) {
                         PreparedStatement hmdbStatement = connection.prepareStatement(
                                 "INSERT INTO compounds_hmdb (compound_id, hmdb_id, created, last_updated) " +
                                         "VALUES (?, ?, ?, ?)");
@@ -238,7 +238,7 @@ public class CompoundService {
                     }
 
                     /* compounds_in_house */
-                    if (rowsInserted > 0 && !compound.getCreatedInHouse().isEmpty()) {
+                    if (rowsInserted > 0 && !compound.getCreatedInHouse().isEmpty() && compound.getCreatedInHouse() != null) {
                         PreparedStatement inhouseStatement = connection.prepareStatement(
                                 "INSERT INTO compounds_in_house (compound_id, in_house_id, source_data, description," +
                                         " created, last_updated) VALUES (?, ?, ?, ?, ?, ?)");
@@ -255,7 +255,7 @@ public class CompoundService {
                     }
 
                     /* compounds_kegg */
-                    if (rowsInserted > 0 && !compound.getCreatedKegg().isEmpty()) {
+                    if (rowsInserted > 0 && !compound.getCreatedKegg().isEmpty() && compound.getCreatedKegg() != null) {
                         PreparedStatement keggStatement = connection.prepareStatement(
                                 "INSERT INTO compounds_kegg (compound_id, kegg_id, created, last_updated) " +
                                         "VALUES (?, ?, ?, ?)");
@@ -270,7 +270,7 @@ public class CompoundService {
                     }
 
                     /* compound_lipids_classification */
-                    if (rowsInserted > 0 && !compound.getCreatedLipid().isEmpty()) {
+                    if (rowsInserted > 0 && !compound.getCreatedLipid().isEmpty() && compound.getCreatedLipid() != null) {
                         PreparedStatement lipidStatement = connection.prepareStatement(
                                 "INSERT INTO compounds_lipids_classification (compound_id, lipid_type, num_chains, " +
                                         "number_carbons, double_bonds, created, last_updated) VALUES (?, ?, ?, ?, ?, ?, ?)");
@@ -288,7 +288,7 @@ public class CompoundService {
                     }
 
                     /* compound_lm */
-                    if (rowsInserted > 0 && !compound.getCreatedLm().isEmpty()) {
+                    if (rowsInserted > 0 && !compound.getCreatedLm().isEmpty() && compound.getCreatedLm() != null) {
                         PreparedStatement lmStatement = connection.prepareStatement(
                                 "INSERT INTO compounds_lm (compound_id, lm_id, created, last_updated) " +
                                         "VALUES (?, ?, ?, ?)");
@@ -303,7 +303,7 @@ public class CompoundService {
                     }
 
                     /* compound_lm_classification */
-                    if (rowsInserted > 0 && !compound.getCreatedLmClassification().isEmpty()) {
+                    if (rowsInserted > 0 && !compound.getCreatedLmClassification().isEmpty() && compound.getCreatedLmClassification() != null) {
                         PreparedStatement lmclasStatement = connection.prepareStatement(
                                 "INSERT INTO compounds_lm_classification (compound_id, category, main_class, " +
                                         "sub_class, class_level4, created, last_updated) VALUES (?, ?, ?, ?, ?, ?, ?)");
@@ -321,7 +321,7 @@ public class CompoundService {
                     }
 
                     /* compound_pc */
-                    if (rowsInserted > 0 && !compound.getCreatedPc().isEmpty()) {
+                    if (rowsInserted > 0 && !compound.getCreatedPc().isEmpty() && compound.getCreatedPc() != null) {
                         PreparedStatement pcStatement = connection.prepareStatement(
                                 "INSERT INTO compounds_pc (compound_id, pc_id, created, last_updated) " +
                                         "VALUES (?, ?, ?, ?)");
@@ -336,7 +336,7 @@ public class CompoundService {
                     }
 
                     /* compounds_reactions_kegg */
-                    if (rowsInserted > 0 && !compound.getCreatedReaction().isEmpty()) {
+                    if (rowsInserted > 0 && !compound.getCreatedReaction().isEmpty() && compound.getCreatedReaction() != null) {
                         PreparedStatement reactionStatement = connection.prepareStatement(
                                 "INSERT INTO compounds_reactions_kegg (compound_id, reaction_id, created, last_updated) " +
                                         "VALUES (?, ?, ?, ?)");

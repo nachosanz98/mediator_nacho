@@ -14,13 +14,13 @@ import _root_.play.libs.F
 class Routes(
   override val errorHandler: play.api.http.HttpErrorHandler, 
   // @LINE:6
-  HomeController_16: controllers.HomeController,
+  HomeController_17: controllers.HomeController,
   // @LINE:9
   EmployeeController_7: controllers.EmployeeController,
   // @LINE:16
   CompoundController_0: controllers.CompoundController,
   // @LINE:25
-  PathwayController_17: controllers.PathwayController,
+  PathwayController_18: controllers.PathwayController,
   // @LINE:34
   MsmsController_6: controllers.MsmsController,
   // @LINE:43
@@ -48,6 +48,8 @@ class Routes(
   // @LINE:145
   CompoundPathwaysController_8: controllers.CompoundPathwaysController,
   // @LINE:155
+  CompoundsGenController_16: controllers.CompoundsGenController,
+  // @LINE:164
   Assets_15: controllers.Assets,
   val prefix: String
 ) extends GeneratedRouter {
@@ -55,13 +57,13 @@ class Routes(
    @javax.inject.Inject()
    def this(errorHandler: play.api.http.HttpErrorHandler,
     // @LINE:6
-    HomeController_16: controllers.HomeController,
+    HomeController_17: controllers.HomeController,
     // @LINE:9
     EmployeeController_7: controllers.EmployeeController,
     // @LINE:16
     CompoundController_0: controllers.CompoundController,
     // @LINE:25
-    PathwayController_17: controllers.PathwayController,
+    PathwayController_18: controllers.PathwayController,
     // @LINE:34
     MsmsController_6: controllers.MsmsController,
     // @LINE:43
@@ -89,13 +91,15 @@ class Routes(
     // @LINE:145
     CompoundPathwaysController_8: controllers.CompoundPathwaysController,
     // @LINE:155
+    CompoundsGenController_16: controllers.CompoundsGenController,
+    // @LINE:164
     Assets_15: controllers.Assets
-  ) = this(errorHandler, HomeController_16, EmployeeController_7, CompoundController_0, PathwayController_17, MsmsController_6, CeEffMobController_10, ChainsController_9, OntologyTermsController_11, ClassyfireClassificationController_12, CeExperimentalPropertiesController_2, CompoundCasController_1, CeExpPropMetadataController_3, CompoundCeProductIonController_14, CompoundChainController_5, CompoundClassyfireController_13, CompoundOntologyController_4, CompoundPathwaysController_8, Assets_15, "/")
+  ) = this(errorHandler, HomeController_17, EmployeeController_7, CompoundController_0, PathwayController_18, MsmsController_6, CeEffMobController_10, ChainsController_9, OntologyTermsController_11, ClassyfireClassificationController_12, CeExperimentalPropertiesController_2, CompoundCasController_1, CeExpPropMetadataController_3, CompoundCeProductIonController_14, CompoundChainController_5, CompoundClassyfireController_13, CompoundOntologyController_4, CompoundPathwaysController_8, CompoundsGenController_16, Assets_15, "/")
 
   def withPrefix(addPrefix: String): Routes = {
     val prefix = play.api.routing.Router.concatPrefix(addPrefix, this.prefix)
     router.RoutesPrefix.setPrefix(prefix)
-    new Routes(errorHandler, HomeController_16, EmployeeController_7, CompoundController_0, PathwayController_17, MsmsController_6, CeEffMobController_10, ChainsController_9, OntologyTermsController_11, ClassyfireClassificationController_12, CeExperimentalPropertiesController_2, CompoundCasController_1, CeExpPropMetadataController_3, CompoundCeProductIonController_14, CompoundChainController_5, CompoundClassyfireController_13, CompoundOntologyController_4, CompoundPathwaysController_8, Assets_15, prefix)
+    new Routes(errorHandler, HomeController_17, EmployeeController_7, CompoundController_0, PathwayController_18, MsmsController_6, CeEffMobController_10, ChainsController_9, OntologyTermsController_11, ClassyfireClassificationController_12, CeExperimentalPropertiesController_2, CompoundCasController_1, CeExpPropMetadataController_3, CompoundCeProductIonController_14, CompoundChainController_5, CompoundClassyfireController_13, CompoundOntologyController_4, CompoundPathwaysController_8, CompoundsGenController_16, Assets_15, prefix)
   }
 
   private[this] val defaultPrefix: String = {
@@ -190,7 +194,7 @@ class Routes(
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """compoundChain/list""", """controllers.CompoundChainController.listCompoundChain()"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """compoundChain""", """controllers.CompoundChainController.listCompoundChainInRange(startId:Int, endId:Int)"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """compoundChain/""" + "$" + """compoundId<[^/]+>""", """controllers.CompoundChainController.listCompoundChainByCompoundId(compoundId:Int)"""),
-    ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """compoundChain/""", """controllers.CompoundChainController.create(request:Request)"""),
+    ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """compoundChain""", """controllers.CompoundChainController.create(request:Request)"""),
     ("""PUT""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """compoundChain/""" + "$" + """compoundId<[^/]+>/""" + "$" + """chainId<[^/]+>""", """controllers.CompoundChainController.update(request:Request, compoundId:Int, chainId:Int)"""),
     ("""DELETE""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """compoundChain/""" + "$" + """compoundId<[^/]+>/""" + "$" + """chainId<[^/]+>""", """controllers.CompoundChainController.delete(compoundId:Int, chainId:Int)"""),
     ("""PATCH""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """compoundChain/""" + "$" + """compoundId<[^/]+>/""" + "$" + """chainId<[^/]+>""", """controllers.CompoundChainController.patchCompoundChain(request:Request, compoundId:Int, chainId:Int)"""),
@@ -198,7 +202,7 @@ class Routes(
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """compoundClassyfire/list""", """controllers.CompoundClassyfireController.listCompoundClassyfire()"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """compoundClassyfire""", """controllers.CompoundClassyfireController.listCompoundClassyfireInRange(startId:Int, endId:Int)"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """compoundClassyfire/""" + "$" + """compoundId<[^/]+>""", """controllers.CompoundClassyfireController.listCompoundClassyfireByCompoundId(compoundId:Int)"""),
-    ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """compoundClassyfire/""", """controllers.CompoundClassyfireController.create(request:Request)"""),
+    ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """compoundClassyfire""", """controllers.CompoundClassyfireController.create(request:Request)"""),
     ("""PUT""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """compoundClassyfire/""" + "$" + """compoundId<[^/]+>/""" + "$" + """nodeId<[^/]+>""", """controllers.CompoundClassyfireController.update(request:Request, compoundId:Int, nodeId:String)"""),
     ("""DELETE""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """compoundClassyfire/""" + "$" + """compoundId<[^/]+>/""" + "$" + """nodeId<[^/]+>""", """controllers.CompoundClassyfireController.delete(compoundId:Int, nodeId:String)"""),
     ("""PATCH""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """compoundClassyfire/""" + "$" + """compoundId<[^/]+>/""" + "$" + """nodeId<[^/]+>""", """controllers.CompoundClassyfireController.patchCompoundClassyfire(request:Request, compoundId:Int, nodeId:String)"""),
@@ -206,7 +210,7 @@ class Routes(
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """compoundOntology/list""", """controllers.CompoundOntologyController.listCompoundOntology()"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """compoundOntology""", """controllers.CompoundOntologyController.listCompoundOntologyInRange(startId:Int, endId:Int)"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """compoundOntology/""" + "$" + """compoundId<[^/]+>""", """controllers.CompoundOntologyController.listCompoundOntologyByCompoundId(compoundId:Int)"""),
-    ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """compoundOntology/""", """controllers.CompoundOntologyController.create(request:Request)"""),
+    ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """compoundOntology""", """controllers.CompoundOntologyController.create(request:Request)"""),
     ("""PUT""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """compoundOntology/""" + "$" + """compoundId<[^/]+>/""" + "$" + """ontologyTermId<[^/]+>""", """controllers.CompoundOntologyController.update(request:Request, compoundId:Int, ontologyTermId:Int)"""),
     ("""DELETE""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """compoundOntology/""" + "$" + """compoundId<[^/]+>/""" + "$" + """ontologyTermId<[^/]+>""", """controllers.CompoundOntologyController.delete(compoundId:Int, ontologyTermId:Int)"""),
     ("""PATCH""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """compoundOntology/""" + "$" + """compoundId<[^/]+>/""" + "$" + """ontologyTermId<[^/]+>""", """controllers.CompoundOntologyController.patchCompoundOntology(request:Request, compoundId:Int, ontologyTermId:Int)"""),
@@ -214,10 +218,17 @@ class Routes(
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """compoundPathways/list""", """controllers.CompoundPathwaysController.listCompoundPathways()"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """compoundPathways""", """controllers.CompoundPathwaysController.listCompoundPathwaysInRange(startId:Int, endId:Int)"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """compoundPathways/""" + "$" + """compoundId<[^/]+>""", """controllers.CompoundPathwaysController.listCompoundPathwaysByCompoundId(compoundId:Int)"""),
-    ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """compoundPathways/""", """controllers.CompoundPathwaysController.create(request:Request)"""),
+    ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """compoundPathways""", """controllers.CompoundPathwaysController.create(request:Request)"""),
     ("""PUT""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """compoundPathways/""" + "$" + """compoundId<[^/]+>/""" + "$" + """pathwayId<[^/]+>""", """controllers.CompoundPathwaysController.update(request:Request, compoundId:Int, pathwayId:Int)"""),
     ("""DELETE""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """compoundPathways/""" + "$" + """compoundId<[^/]+>/""" + "$" + """pathwayId<[^/]+>""", """controllers.CompoundPathwaysController.delete(compoundId:Int, pathwayId:Int)"""),
     ("""PATCH""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """compoundPathways/""" + "$" + """compoundId<[^/]+>/""" + "$" + """pathwayId<[^/]+>""", """controllers.CompoundPathwaysController.patchCompoundPathways(request:Request, compoundId:Int, pathwayId:Int)"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """compoundsGen/list""", """controllers.CompoundsGenController.listCompoundsGen()"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """compoundsGen""", """controllers.CompoundsGenController.listCompoundsGenInRange(startId:Int, endId:Int)"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """compoundsGen/""" + "$" + """id<[^/]+>""", """controllers.CompoundsGenController.retrieve(id:Int)"""),
+    ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """compoundsGen""", """controllers.CompoundsGenController.create(request:Request)"""),
+    ("""PUT""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """compoundsGen/""" + "$" + """id<[^/]+>""", """controllers.CompoundsGenController.update(request:Request, id:Int)"""),
+    ("""DELETE""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """compoundsGen/""" + "$" + """id<[^/]+>""", """controllers.CompoundsGenController.delete(id:Int)"""),
+    ("""PATCH""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """compoundsGen/""" + "$" + """id<[^/]+>""", """controllers.CompoundsGenController.patchCompoundsGen(request:Request, id:Int)"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """assets/""" + "$" + """file<.+>""", """controllers.Assets.versioned(path:String = "/public", file:Asset)"""),
     Nil
   ).foldLeft(List.empty[(String,String,String)]) { (s,e) => e.asInstanceOf[Any] match {
@@ -231,7 +242,7 @@ class Routes(
     PathPattern(List(StaticPart(this.prefix)))
   )
   private[this] lazy val controllers_HomeController_index0_invoker = createInvoker(
-    HomeController_16.index(),
+    HomeController_17.index(),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.HomeController",
@@ -475,7 +486,7 @@ class Routes(
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("pathways/list")))
   )
   private[this] lazy val controllers_PathwayController_listPathways13_invoker = createInvoker(
-    PathwayController_17.listPathways(),
+    PathwayController_18.listPathways(),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.PathwayController",
@@ -483,7 +494,7 @@ class Routes(
       Nil,
       "GET",
       this.prefix + """pathways/list""",
-      """ APIs in Pathways""",
+      """ APIs in PathwaysController""",
       Seq()
     )
   )
@@ -493,7 +504,7 @@ class Routes(
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("pathways")))
   )
   private[this] lazy val controllers_PathwayController_listPathwaysInRange14_invoker = createInvoker(
-    PathwayController_17.listPathwaysInRange(fakeValue[Int], fakeValue[Int]),
+    PathwayController_18.listPathwaysInRange(fakeValue[Int], fakeValue[Int]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.PathwayController",
@@ -511,7 +522,7 @@ class Routes(
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("pathways/"), DynamicPart("id", """[^/]+""",true)))
   )
   private[this] lazy val controllers_PathwayController_retrieve15_invoker = createInvoker(
-    PathwayController_17.retrieve(fakeValue[Int]),
+    PathwayController_18.retrieve(fakeValue[Int]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.PathwayController",
@@ -531,7 +542,7 @@ class Routes(
   private[this] lazy val controllers_PathwayController_create16_invoker = createInvoker(
     
     (req:play.mvc.Http.Request) =>
-      PathwayController_17.create(fakeValue[play.mvc.Http.Request]),
+      PathwayController_18.create(fakeValue[play.mvc.Http.Request]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.PathwayController",
@@ -551,7 +562,7 @@ class Routes(
   private[this] lazy val controllers_PathwayController_update17_invoker = createInvoker(
     
     (req:play.mvc.Http.Request) =>
-      PathwayController_17.update(fakeValue[play.mvc.Http.Request], fakeValue[Int]),
+      PathwayController_18.update(fakeValue[play.mvc.Http.Request], fakeValue[Int]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.PathwayController",
@@ -569,7 +580,7 @@ class Routes(
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("pathways/"), DynamicPart("id", """[^/]+""",true)))
   )
   private[this] lazy val controllers_PathwayController_delete18_invoker = createInvoker(
-    PathwayController_17.delete(fakeValue[Int]),
+    PathwayController_18.delete(fakeValue[Int]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.PathwayController",
@@ -589,7 +600,7 @@ class Routes(
   private[this] lazy val controllers_PathwayController_patchPathway19_invoker = createInvoker(
     
     (req:play.mvc.Http.Request) =>
-      PathwayController_17.patchPathway(fakeValue[play.mvc.Http.Request], fakeValue[Int]),
+      PathwayController_18.patchPathway(fakeValue[play.mvc.Http.Request], fakeValue[Int]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.PathwayController",
@@ -1864,7 +1875,7 @@ class Routes(
 
   // @LINE:119
   private[this] lazy val controllers_CompoundChainController_create87_route = Route("POST",
-    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("compoundChain/")))
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("compoundChain")))
   )
   private[this] lazy val controllers_CompoundChainController_create87_invoker = createInvoker(
     
@@ -1876,7 +1887,7 @@ class Routes(
       "create",
       Seq(classOf[play.mvc.Http.Request]),
       "POST",
-      this.prefix + """compoundChain/""",
+      this.prefix + """compoundChain""",
       """""",
       Seq()
     )
@@ -2014,7 +2025,7 @@ class Routes(
 
   // @LINE:129
   private[this] lazy val controllers_CompoundClassyfireController_create95_route = Route("POST",
-    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("compoundClassyfire/")))
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("compoundClassyfire")))
   )
   private[this] lazy val controllers_CompoundClassyfireController_create95_invoker = createInvoker(
     
@@ -2026,7 +2037,7 @@ class Routes(
       "create",
       Seq(classOf[play.mvc.Http.Request]),
       "POST",
-      this.prefix + """compoundClassyfire/""",
+      this.prefix + """compoundClassyfire""",
       """""",
       Seq()
     )
@@ -2164,7 +2175,7 @@ class Routes(
 
   // @LINE:139
   private[this] lazy val controllers_CompoundOntologyController_create103_route = Route("POST",
-    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("compoundOntology/")))
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("compoundOntology")))
   )
   private[this] lazy val controllers_CompoundOntologyController_create103_invoker = createInvoker(
     
@@ -2176,7 +2187,7 @@ class Routes(
       "create",
       Seq(classOf[play.mvc.Http.Request]),
       "POST",
-      this.prefix + """compoundOntology/""",
+      this.prefix + """compoundOntology""",
       """""",
       Seq()
     )
@@ -2314,7 +2325,7 @@ class Routes(
 
   // @LINE:149
   private[this] lazy val controllers_CompoundPathwaysController_create111_route = Route("POST",
-    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("compoundPathways/")))
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("compoundPathways")))
   )
   private[this] lazy val controllers_CompoundPathwaysController_create111_invoker = createInvoker(
     
@@ -2326,7 +2337,7 @@ class Routes(
       "create",
       Seq(classOf[play.mvc.Http.Request]),
       "POST",
-      this.prefix + """compoundPathways/""",
+      this.prefix + """compoundPathways""",
       """""",
       Seq()
     )
@@ -2391,10 +2402,142 @@ class Routes(
   )
 
   // @LINE:155
-  private[this] lazy val controllers_Assets_versioned115_route = Route("GET",
+  private[this] lazy val controllers_CompoundsGenController_listCompoundsGen115_route = Route("GET",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("compoundsGen/list")))
+  )
+  private[this] lazy val controllers_CompoundsGenController_listCompoundsGen115_invoker = createInvoker(
+    CompoundsGenController_16.listCompoundsGen(),
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.CompoundsGenController",
+      "listCompoundsGen",
+      Nil,
+      "GET",
+      this.prefix + """compoundsGen/list""",
+      """ APIs in CompoundGenController""",
+      Seq()
+    )
+  )
+
+  // @LINE:156
+  private[this] lazy val controllers_CompoundsGenController_listCompoundsGenInRange116_route = Route("GET",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("compoundsGen")))
+  )
+  private[this] lazy val controllers_CompoundsGenController_listCompoundsGenInRange116_invoker = createInvoker(
+    CompoundsGenController_16.listCompoundsGenInRange(fakeValue[Int], fakeValue[Int]),
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.CompoundsGenController",
+      "listCompoundsGenInRange",
+      Seq(classOf[Int], classOf[Int]),
+      "GET",
+      this.prefix + """compoundsGen""",
+      """""",
+      Seq()
+    )
+  )
+
+  // @LINE:157
+  private[this] lazy val controllers_CompoundsGenController_retrieve117_route = Route("GET",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("compoundsGen/"), DynamicPart("id", """[^/]+""",true)))
+  )
+  private[this] lazy val controllers_CompoundsGenController_retrieve117_invoker = createInvoker(
+    CompoundsGenController_16.retrieve(fakeValue[Int]),
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.CompoundsGenController",
+      "retrieve",
+      Seq(classOf[Int]),
+      "GET",
+      this.prefix + """compoundsGen/""" + "$" + """id<[^/]+>""",
+      """""",
+      Seq()
+    )
+  )
+
+  // @LINE:158
+  private[this] lazy val controllers_CompoundsGenController_create118_route = Route("POST",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("compoundsGen")))
+  )
+  private[this] lazy val controllers_CompoundsGenController_create118_invoker = createInvoker(
+    
+    (req:play.mvc.Http.Request) =>
+      CompoundsGenController_16.create(fakeValue[play.mvc.Http.Request]),
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.CompoundsGenController",
+      "create",
+      Seq(classOf[play.mvc.Http.Request]),
+      "POST",
+      this.prefix + """compoundsGen""",
+      """""",
+      Seq()
+    )
+  )
+
+  // @LINE:159
+  private[this] lazy val controllers_CompoundsGenController_update119_route = Route("PUT",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("compoundsGen/"), DynamicPart("id", """[^/]+""",true)))
+  )
+  private[this] lazy val controllers_CompoundsGenController_update119_invoker = createInvoker(
+    
+    (req:play.mvc.Http.Request) =>
+      CompoundsGenController_16.update(fakeValue[play.mvc.Http.Request], fakeValue[Int]),
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.CompoundsGenController",
+      "update",
+      Seq(classOf[play.mvc.Http.Request], classOf[Int]),
+      "PUT",
+      this.prefix + """compoundsGen/""" + "$" + """id<[^/]+>""",
+      """""",
+      Seq()
+    )
+  )
+
+  // @LINE:160
+  private[this] lazy val controllers_CompoundsGenController_delete120_route = Route("DELETE",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("compoundsGen/"), DynamicPart("id", """[^/]+""",true)))
+  )
+  private[this] lazy val controllers_CompoundsGenController_delete120_invoker = createInvoker(
+    CompoundsGenController_16.delete(fakeValue[Int]),
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.CompoundsGenController",
+      "delete",
+      Seq(classOf[Int]),
+      "DELETE",
+      this.prefix + """compoundsGen/""" + "$" + """id<[^/]+>""",
+      """""",
+      Seq()
+    )
+  )
+
+  // @LINE:161
+  private[this] lazy val controllers_CompoundsGenController_patchCompoundsGen121_route = Route("PATCH",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("compoundsGen/"), DynamicPart("id", """[^/]+""",true)))
+  )
+  private[this] lazy val controllers_CompoundsGenController_patchCompoundsGen121_invoker = createInvoker(
+    
+    (req:play.mvc.Http.Request) =>
+      CompoundsGenController_16.patchCompoundsGen(fakeValue[play.mvc.Http.Request], fakeValue[Int]),
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.CompoundsGenController",
+      "patchCompoundsGen",
+      Seq(classOf[play.mvc.Http.Request], classOf[Int]),
+      "PATCH",
+      this.prefix + """compoundsGen/""" + "$" + """id<[^/]+>""",
+      """""",
+      Seq()
+    )
+  )
+
+  // @LINE:164
+  private[this] lazy val controllers_Assets_versioned122_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("assets/"), DynamicPart("file", """.+""",false)))
   )
-  private[this] lazy val controllers_Assets_versioned115_invoker = createInvoker(
+  private[this] lazy val controllers_Assets_versioned122_invoker = createInvoker(
     Assets_15.versioned(fakeValue[String], fakeValue[Asset]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
@@ -2414,7 +2557,7 @@ class Routes(
     // @LINE:6
     case controllers_HomeController_index0_route(params@_) =>
       call { 
-        controllers_HomeController_index0_invoker.call(HomeController_16.index())
+        controllers_HomeController_index0_invoker.call(HomeController_17.index())
       }
   
     // @LINE:9
@@ -2497,46 +2640,46 @@ class Routes(
     // @LINE:25
     case controllers_PathwayController_listPathways13_route(params@_) =>
       call { 
-        controllers_PathwayController_listPathways13_invoker.call(PathwayController_17.listPathways())
+        controllers_PathwayController_listPathways13_invoker.call(PathwayController_18.listPathways())
       }
   
     // @LINE:26
     case controllers_PathwayController_listPathwaysInRange14_route(params@_) =>
       call(params.fromQuery[Int]("startId", None), params.fromQuery[Int]("endId", None)) { (startId, endId) =>
-        controllers_PathwayController_listPathwaysInRange14_invoker.call(PathwayController_17.listPathwaysInRange(startId, endId))
+        controllers_PathwayController_listPathwaysInRange14_invoker.call(PathwayController_18.listPathwaysInRange(startId, endId))
       }
   
     // @LINE:27
     case controllers_PathwayController_retrieve15_route(params@_) =>
       call(params.fromPath[Int]("id", None)) { (id) =>
-        controllers_PathwayController_retrieve15_invoker.call(PathwayController_17.retrieve(id))
+        controllers_PathwayController_retrieve15_invoker.call(PathwayController_18.retrieve(id))
       }
   
     // @LINE:28
     case controllers_PathwayController_create16_route(params@_) =>
       call { 
         controllers_PathwayController_create16_invoker.call(
-          req => PathwayController_17.create(req))
+          req => PathwayController_18.create(req))
       }
   
     // @LINE:29
     case controllers_PathwayController_update17_route(params@_) =>
       call(params.fromPath[Int]("id", None)) { (id) =>
         controllers_PathwayController_update17_invoker.call(
-          req => PathwayController_17.update(req, id))
+          req => PathwayController_18.update(req, id))
       }
   
     // @LINE:30
     case controllers_PathwayController_delete18_route(params@_) =>
       call(params.fromPath[Int]("id", None)) { (id) =>
-        controllers_PathwayController_delete18_invoker.call(PathwayController_17.delete(id))
+        controllers_PathwayController_delete18_invoker.call(PathwayController_18.delete(id))
       }
   
     // @LINE:31
     case controllers_PathwayController_patchPathway19_route(params@_) =>
       call(params.fromPath[Int]("id", None)) { (id) =>
         controllers_PathwayController_patchPathway19_invoker.call(
-          req => PathwayController_17.patchPathway(req, id))
+          req => PathwayController_18.patchPathway(req, id))
       }
   
     // @LINE:34
@@ -3149,9 +3292,54 @@ class Routes(
       }
   
     // @LINE:155
-    case controllers_Assets_versioned115_route(params@_) =>
+    case controllers_CompoundsGenController_listCompoundsGen115_route(params@_) =>
+      call { 
+        controllers_CompoundsGenController_listCompoundsGen115_invoker.call(CompoundsGenController_16.listCompoundsGen())
+      }
+  
+    // @LINE:156
+    case controllers_CompoundsGenController_listCompoundsGenInRange116_route(params@_) =>
+      call(params.fromQuery[Int]("startId", None), params.fromQuery[Int]("endId", None)) { (startId, endId) =>
+        controllers_CompoundsGenController_listCompoundsGenInRange116_invoker.call(CompoundsGenController_16.listCompoundsGenInRange(startId, endId))
+      }
+  
+    // @LINE:157
+    case controllers_CompoundsGenController_retrieve117_route(params@_) =>
+      call(params.fromPath[Int]("id", None)) { (id) =>
+        controllers_CompoundsGenController_retrieve117_invoker.call(CompoundsGenController_16.retrieve(id))
+      }
+  
+    // @LINE:158
+    case controllers_CompoundsGenController_create118_route(params@_) =>
+      call { 
+        controllers_CompoundsGenController_create118_invoker.call(
+          req => CompoundsGenController_16.create(req))
+      }
+  
+    // @LINE:159
+    case controllers_CompoundsGenController_update119_route(params@_) =>
+      call(params.fromPath[Int]("id", None)) { (id) =>
+        controllers_CompoundsGenController_update119_invoker.call(
+          req => CompoundsGenController_16.update(req, id))
+      }
+  
+    // @LINE:160
+    case controllers_CompoundsGenController_delete120_route(params@_) =>
+      call(params.fromPath[Int]("id", None)) { (id) =>
+        controllers_CompoundsGenController_delete120_invoker.call(CompoundsGenController_16.delete(id))
+      }
+  
+    // @LINE:161
+    case controllers_CompoundsGenController_patchCompoundsGen121_route(params@_) =>
+      call(params.fromPath[Int]("id", None)) { (id) =>
+        controllers_CompoundsGenController_patchCompoundsGen121_invoker.call(
+          req => CompoundsGenController_16.patchCompoundsGen(req, id))
+      }
+  
+    // @LINE:164
+    case controllers_Assets_versioned122_route(params@_) =>
       call(Param[String]("path", Right("/public")), params.fromPath[Asset]("file", None)) { (path, file) =>
-        controllers_Assets_versioned115_invoker.call(Assets_15.versioned(path, file))
+        controllers_Assets_versioned122_invoker.call(Assets_15.versioned(path, file))
       }
   }
 }

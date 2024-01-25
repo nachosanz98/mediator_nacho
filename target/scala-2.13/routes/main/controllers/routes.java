@@ -13,6 +13,7 @@ public class routes {
   public static final controllers.ReverseClassyfireClassificationController ClassyfireClassificationController = new controllers.ReverseClassyfireClassificationController(RoutesPrefix.byNamePrefix());
   public static final controllers.ReversePathwayController PathwayController = new controllers.ReversePathwayController(RoutesPrefix.byNamePrefix());
   public static final controllers.ReverseCeEffMobController CeEffMobController = new controllers.ReverseCeEffMobController(RoutesPrefix.byNamePrefix());
+  public static final controllers.ReverseCompoundsGenController CompoundsGenController = new controllers.ReverseCompoundsGenController(RoutesPrefix.byNamePrefix());
   public static final controllers.ReverseOntologyTermsController OntologyTermsController = new controllers.ReverseOntologyTermsController(RoutesPrefix.byNamePrefix());
   public static final controllers.ReverseCeExperimentalPropertiesController CeExperimentalPropertiesController = new controllers.ReverseCeExperimentalPropertiesController(RoutesPrefix.byNamePrefix());
   public static final controllers.ReverseCompoundClassyfireController CompoundClassyfireController = new controllers.ReverseCompoundClassyfireController(RoutesPrefix.byNamePrefix());
@@ -34,6 +35,7 @@ public class routes {
     public static final controllers.javascript.ReverseClassyfireClassificationController ClassyfireClassificationController = new controllers.javascript.ReverseClassyfireClassificationController(RoutesPrefix.byNamePrefix());
     public static final controllers.javascript.ReversePathwayController PathwayController = new controllers.javascript.ReversePathwayController(RoutesPrefix.byNamePrefix());
     public static final controllers.javascript.ReverseCeEffMobController CeEffMobController = new controllers.javascript.ReverseCeEffMobController(RoutesPrefix.byNamePrefix());
+    public static final controllers.javascript.ReverseCompoundsGenController CompoundsGenController = new controllers.javascript.ReverseCompoundsGenController(RoutesPrefix.byNamePrefix());
     public static final controllers.javascript.ReverseOntologyTermsController OntologyTermsController = new controllers.javascript.ReverseOntologyTermsController(RoutesPrefix.byNamePrefix());
     public static final controllers.javascript.ReverseCeExperimentalPropertiesController CeExperimentalPropertiesController = new controllers.javascript.ReverseCeExperimentalPropertiesController(RoutesPrefix.byNamePrefix());
     public static final controllers.javascript.ReverseCompoundClassyfireController CompoundClassyfireController = new controllers.javascript.ReverseCompoundClassyfireController(RoutesPrefix.byNamePrefix());

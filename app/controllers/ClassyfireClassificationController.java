@@ -130,11 +130,44 @@ public class ClassyfireClassificationController extends Controller {
                 JsonNode fieldValue = entry.getValue();
 
                 switch (fieldName) {
-                    case "node_id":
-                        existingClassyfireClassificationDictionary.setNodeId(fieldValue.asText());
-                        break;
-                    case "node_name":
+                    case "nodeName":
                         existingClassyfireClassificationDictionary.setNodeName(fieldValue.asText());
+                        break;
+                    case "createdDictionary":
+                        existingClassyfireClassificationDictionary.setCreatedDictionary(fieldValue.asText());
+                        break;
+                    case "lastUpdatedDictionary":
+                        existingClassyfireClassificationDictionary.setLastUpdatedDictionary(fieldValue.asText());
+                        break;
+                    case "kingdom":
+                        existingClassyfireClassificationDictionary.setKingdom(fieldValue.asText());
+                        break;
+                    case "superClass":
+                        existingClassyfireClassificationDictionary.setSuperClass(fieldValue.asText());
+                        break;
+                    case "mainClass":
+                        existingClassyfireClassificationDictionary.setMainClass(fieldValue.asText());
+                        break;
+                    case "subClass":
+                        existingClassyfireClassificationDictionary.setSubClass(fieldValue.asText());
+                        break;
+                    case "directParent":
+                        existingClassyfireClassificationDictionary.setDirectParent(fieldValue.asText());
+                        break;
+                    case "level7":
+                        existingClassyfireClassificationDictionary.setLevel7(fieldValue.asText());
+                        break;
+                    case "level8":
+                        existingClassyfireClassificationDictionary.setLevel8(fieldValue.asText());
+                        break;
+                    case "level9":
+                        existingClassyfireClassificationDictionary.setLevel9(fieldValue.asText());
+                        break;
+                    case "level10":
+                        existingClassyfireClassificationDictionary.setLevel10(fieldValue.asText());
+                        break;
+                    case "level11":
+                        existingClassyfireClassificationDictionary.setLevel11(fieldValue.asText());
                         break;
                     case "created":
                         existingClassyfireClassificationDictionary.setCreated(fieldValue.asText());

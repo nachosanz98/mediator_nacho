@@ -27,7 +27,7 @@ public class OntologyTermsService {
                 db.withConnection(connection -> {
                     PreparedStatement statement = connection.prepareStatement(
                             "SELECT o.*, " +
-                                    "os.ontology_synonym, os.created as createdSyn, os.last_updated as lastUpdatedSyn, " +
+                                    "os.ontology_synonym, os.created as createdSyn, os.last_updated as lastUpdatedSyn " +
                                     "FROM ontology_terms o " +
                                     "LEFT JOIN ontology_synonyms os ON o.ontology_term_id = os.ontology_term_id " +
                                     "WHERE o.ontology_term_id = ?");
@@ -64,34 +64,32 @@ public class OntologyTermsService {
                 db.withConnection(connection -> {
                     int generatedOntologyId = -1;
                     PreparedStatement statement = connection.prepareStatement(
-                            "INSERT INTO ontology_terms (term, definition, external_id, external_source, " +
+                            "INSERT INTO ontology_terms (ontology_term_id, term, definition, external_id, external_source, " +
                                     "ontology_comment, curator, parent_id, ontology_level, created, last_updated) " +
-                                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+                                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 
-                    statement.setString(1, ontologyTerm.getTerm());
-                    statement.setString(2, ontologyTerm.getDefinition());
-                    statement.setString(3, ontologyTerm.getExternalId());
-                    statement.setString(4, ontologyTerm.getExternalSource());
-                    statement.setString(5, ontologyTerm.getOntologyComment());
-                    statement.setString(6, ontologyTerm.getCurator());
-                    statement.setInt(7, ontologyTerm.getParentId());
-                    statement.setInt(8, ontologyTerm.getOntologyLevel());
-                    statement.setString(9, ontologyTerm.getCreated());
-                    statement.setString(10, ontologyTerm.getLastUpdated());
+                    statement.setInt(1, ontologyTerm.getOntologyTermId());
+                    statement.setString(2, ontologyTerm.getTerm());
+                    statement.setString(3, ontologyTerm.getDefinition());
+                    statement.setString(4, ontologyTerm.getExternalId());
+                    statement.setString(5, ontologyTerm.getExternalSource());
+                    statement.setString(6, ontologyTerm.getOntologyComment());
+                    statement.setString(7, ontologyTerm.getCurator());
+                    statement.setInt(8, ontologyTerm.getParentId());
+                    statement.setInt(9, ontologyTerm.getOntologyLevel());
+                    statement.setString(10, ontologyTerm.getCreated());
+                    statement.setString(11, ontologyTerm.getLastUpdated());
 
                     int rowsInserted = statement.executeUpdate();
 
-                    ResultSet rs = statement.getGeneratedKeys();
-                    if (rs.next()) {
-                        generatedOntologyId = rs.getInt(1);
-                    }
+
 
                     /* ontology_synonyms*/
                     if (rowsInserted > 0 && !ontologyTerm.getCreatedSynonym().isEmpty()) {
                         PreparedStatement ontStatement = connection.prepareStatement(
                                 "INSERT INTO ontology_synonyms (ontology_term_id, ontology_synonym, created, last_updated) " +
                                         "VALUES (?, ?, ?, ?)");
-                        ontStatement.setInt(1, generatedOntologyId);
+                        ontStatement.setInt(1, ontologyTerm.getOntologyTermId());
                         ontStatement.setString(2, ontologyTerm.getOntologySynonym());
                         ontStatement.setString(3, ontologyTerm.getCreatedSynonym());
                         ontStatement.setString(4, ontologyTerm.getLastUpdatedSynonym());
@@ -127,7 +125,7 @@ public class OntologyTermsService {
                 db.withConnection(connection -> {
                     PreparedStatement statement = connection.prepareStatement(
                             "SELECT o.*, " +
-                                    "os.ontology_synonym, os.created as createdSyn, os.last_updated as lastUpdatedSyn, " +
+                                    "os.ontology_synonym, os.created as createdSyn, os.last_updated as lastUpdatedSyn " +
                                     "FROM ontology_terms o " +
                                     "LEFT JOIN ontology_synonyms os ON o.ontology_term_id = os.ontology_term_id");
 
@@ -204,7 +202,7 @@ public class OntologyTermsService {
                 db.withConnection(connection -> {
                     PreparedStatement statement = connection.prepareStatement(
                             "SELECT o.*, " +
-                                    "os.ontology_synonym, os.created as createdSyn, os.last_updated as lastUpdatedSyn, " +
+                                    "os.ontology_synonym, os.created as createdSyn, os.last_updated as lastUpdatedSyn " +
                                     "FROM ontology_terms o " +
                                     "LEFT JOIN ontology_synonyms os ON o.ontology_term_id = os.ontology_term_id" +
                                     "WHERE ontology_term_id BETWEEN ? AND ?");

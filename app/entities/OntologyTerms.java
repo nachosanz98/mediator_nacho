@@ -1,7 +1,10 @@
 package entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class OntologyTerms {
 
+    @JsonProperty("ontology_term_id")
     private int ontologyTermId;
     private String term;
     private String definition;

@@ -83,7 +83,7 @@ package controllers.javascript {
       "controllers.CompoundChainController.create",
       """
         function() {
-          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "compoundChain/"})
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "compoundChain"})
         }
       """
     )
@@ -100,7 +100,7 @@ package controllers.javascript {
   
   }
 
-  // @LINE:155
+  // @LINE:164
   class ReverseAssets(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -108,7 +108,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:155
+    // @LINE:164
     def versioned: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Assets.versioned",
       """
@@ -440,6 +440,86 @@ package controllers.javascript {
   
   }
 
+  // @LINE:155
+  class ReverseCompoundsGenController(_prefix: => String) {
+
+    def _defaultPrefix: String = {
+      if (_prefix.endsWith("/")) "" else "/"
+    }
+
+  
+    // @LINE:161
+    def patchCompoundsGen: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.CompoundsGenController.patchCompoundsGen",
+      """
+        function(id0) {
+          return _wA({method:"PATCH", url:"""" + _prefix + { _defaultPrefix } + """" + "compoundsGen/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[Int]].javascriptUnbind + """)("id", id0))})
+        }
+      """
+    )
+  
+    // @LINE:155
+    def listCompoundsGen: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.CompoundsGenController.listCompoundsGen",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "compoundsGen/list"})
+        }
+      """
+    )
+  
+    // @LINE:160
+    def delete: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.CompoundsGenController.delete",
+      """
+        function(id0) {
+          return _wA({method:"DELETE", url:"""" + _prefix + { _defaultPrefix } + """" + "compoundsGen/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[Int]].javascriptUnbind + """)("id", id0))})
+        }
+      """
+    )
+  
+    // @LINE:159
+    def update: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.CompoundsGenController.update",
+      """
+        function(id0) {
+          return _wA({method:"PUT", url:"""" + _prefix + { _defaultPrefix } + """" + "compoundsGen/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[Int]].javascriptUnbind + """)("id", id0))})
+        }
+      """
+    )
+  
+    // @LINE:157
+    def retrieve: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.CompoundsGenController.retrieve",
+      """
+        function(id0) {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "compoundsGen/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[Int]].javascriptUnbind + """)("id", id0))})
+        }
+      """
+    )
+  
+    // @LINE:156
+    def listCompoundsGenInRange: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.CompoundsGenController.listCompoundsGenInRange",
+      """
+        function(startId0,endId1) {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "compoundsGen" + _qS([(""" + implicitly[play.api.mvc.QueryStringBindable[Int]].javascriptUnbind + """)("startId", startId0), (""" + implicitly[play.api.mvc.QueryStringBindable[Int]].javascriptUnbind + """)("endId", endId1)])})
+        }
+      """
+    )
+  
+    // @LINE:158
+    def create: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.CompoundsGenController.create",
+      """
+        function() {
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "compoundsGen"})
+        }
+      """
+    )
+  
+  }
+
   // @LINE:61
   class ReverseOntologyTermsController(_prefix: => String) {
 
@@ -673,7 +753,7 @@ package controllers.javascript {
       "controllers.CompoundClassyfireController.create",
       """
         function() {
-          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "compoundClassyfire/"})
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "compoundClassyfire"})
         }
       """
     )
@@ -943,7 +1023,7 @@ package controllers.javascript {
       "controllers.CompoundOntologyController.create",
       """
         function() {
-          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "compoundOntology/"})
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "compoundOntology"})
         }
       """
     )
@@ -1033,7 +1113,7 @@ package controllers.javascript {
       "controllers.CompoundPathwaysController.create",
       """
         function() {
-          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "compoundPathways/"})
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "compoundPathways"})
         }
       """
     )

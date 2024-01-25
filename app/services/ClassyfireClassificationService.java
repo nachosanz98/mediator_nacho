@@ -29,7 +29,7 @@ public class ClassyfireClassificationService {
                                     "cl.node_id, cl.kingdom, cl.super_class, cl.main_class, cl.sub_class, cl.direct_parent," +
                                     "cl.level_7, cl.level_8, cl.level_9, cl.level_10, cl.level_11, cl.created as createdClassyfire, " +
                                     "cl.last_updated as lastUpdatedClassyfire " +
-                                    "FROM classyfire_classification_dictionary c" +
+                                    "FROM classyfire_classification_dictionary c " +
                                     "LEFT JOIN classyfire_classification cl ON c.node_id = cl.node_id " +
                                     "WHERE c.classyfire_id = ?");
                     statement.setInt(1, id);
@@ -143,7 +143,7 @@ public class ClassyfireClassificationService {
                                     "cl.node_id, cl.kingdom, cl.super_class, cl.main_class, cl.sub_class, cl.direct_parent," +
                                     "cl.level_7, cl.level_8, cl.level_9, cl.level_10, cl.level_11, cl.created as createdClassyfire, " +
                                     "cl.last_updated as lastUpdatedClassyfire " +
-                                    "FROM classyfire_classification_dictionary c" +
+                                    "FROM classyfire_classification_dictionary c " +
                                     "LEFT JOIN classyfire_classification cl ON c.node_id = cl.node_id");
 
                     ResultSet resultSet = statement.executeQuery();
@@ -181,36 +181,35 @@ public class ClassyfireClassificationService {
         return CompletableFuture.supplyAsync(() ->
                 db.withConnection(connection -> {
                     PreparedStatement statement = connection.prepareStatement(
-                            "UPDATE classyfire_classification_dictionary SET node_id = ?, node_name = ?, created = ?, " +
+                            "UPDATE classyfire_classification_dictionary SET node_name = ?, created = ?, " +
                                     "last_updated = ? WHERE classyfire_id = ?");
 
-                    statement.setString(1, classyfireClassificationDictionary.getNodeId());
-                    statement.setString(2, classyfireClassificationDictionary.getNodeName());
-                    statement.setString(3, classyfireClassificationDictionary.getCreatedDictionary());
-                    statement.setString(4, classyfireClassificationDictionary.getLastUpdatedDictionary());
-                    statement.setInt(5, classyfireClassificationDictionary.getClassyfireId());
+                    statement.setString(1, classyfireClassificationDictionary.getNodeName());
+                    statement.setString(2, classyfireClassificationDictionary.getCreatedDictionary());
+                    statement.setString(3, classyfireClassificationDictionary.getLastUpdatedDictionary());
+                    statement.setInt(4, id);
 
                     int rowsUpdated = statement.executeUpdate();
 
                     /* classyfire_classification_dictionary */
-                    if (classyfireClassificationDictionary.getLastUpdatedDictionary() != null && !classyfireClassificationDictionary.getLastUpdatedDictionary().isEmpty()) {
+                    if (classyfireClassificationDictionary.getLastUpdated() != null && !classyfireClassificationDictionary.getLastUpdated().isEmpty()) {
                         PreparedStatement classyStatement = connection.prepareStatement(
-                                "UPDATE classyfire_classification SET (node_id, kingdom, super_class, main_class, sub_class, " +
-                                        "direct_parent, level_7, level_8, level_9, level_10, level_11, created, last_updated) " +
-                                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                        classyStatement.setString(1, classyfireClassificationDictionary.getNodeId());
-                        classyStatement.setString(2, classyfireClassificationDictionary.getKingdom());
-                        classyStatement.setString(3, classyfireClassificationDictionary.getSuperClass());
-                        classyStatement.setString(4, classyfireClassificationDictionary.getMainClass());
-                        classyStatement.setString(5, classyfireClassificationDictionary.getSubClass());
-                        classyStatement.setString(6, classyfireClassificationDictionary.getDirectParent());
-                        classyStatement.setString(7, classyfireClassificationDictionary.getLevel7());
-                        classyStatement.setString(8, classyfireClassificationDictionary.getLevel8());
-                        classyStatement.setString(9, classyfireClassificationDictionary.getLevel9());
-                        classyStatement.setString(10, classyfireClassificationDictionary.getLevel10());
-                        classyStatement.setString(11, classyfireClassificationDictionary.getLevel11());
-                        classyStatement.setString(12, classyfireClassificationDictionary.getCreated());
-                        classyStatement.setString(13, classyfireClassificationDictionary.getLastUpdated());
+                                "UPDATE classyfire_classification SET kingdom = ?, super_class = ?, main_class = ?," +
+                                        " sub_class = ?, direct_parent = ?, level_7 = ?, level_8 = ?, level_9 = ?, " +
+                                        "level_10 = ?, level_11 = ?, created = ?, last_updated = ? ");
+
+                        classyStatement.setString(1, classyfireClassificationDictionary.getKingdom());
+                        classyStatement.setString(2, classyfireClassificationDictionary.getSuperClass());
+                        classyStatement.setString(3, classyfireClassificationDictionary.getMainClass());
+                        classyStatement.setString(4, classyfireClassificationDictionary.getSubClass());
+                        classyStatement.setString(5, classyfireClassificationDictionary.getDirectParent());
+                        classyStatement.setString(6, classyfireClassificationDictionary.getLevel7());
+                        classyStatement.setString(7, classyfireClassificationDictionary.getLevel8());
+                        classyStatement.setString(8, classyfireClassificationDictionary.getLevel9());
+                        classyStatement.setString(9, classyfireClassificationDictionary.getLevel10());
+                        classyStatement.setString(10, classyfireClassificationDictionary.getLevel11());
+                        classyStatement.setString(11, classyfireClassificationDictionary.getCreated());
+                        classyStatement.setString(12, classyfireClassificationDictionary.getLastUpdated());
                         int classyRowsInserted = classyStatement.executeUpdate();
                         if (classyRowsInserted == 0) {
                             return false;
@@ -228,7 +227,7 @@ public class ClassyfireClassificationService {
                                     "cl.node_id, cl.kingdom, cl.super_class, cl.main_class, cl.sub_class, cl.direct_parent," +
                                     "cl.level_7, cl.level_8, cl.level_9, cl.level_10, cl.level_11, cl.created as createdClassyfire, " +
                                     "cl.last_updated as lastUpdatedClassyfire " +
-                                    "FROM classyfire_classification_dictionary c" +
+                                    "FROM classyfire_classification_dictionary c " +
                                     "LEFT JOIN classyfire_classification cl ON c.node_id = cl.node_id " +
                                     "WHERE c.classyfire_id BETWEEN ? AND ?");
                     statement.setInt(1, startId);

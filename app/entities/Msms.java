@@ -1,7 +1,10 @@
 package entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Msms {
 
+    @JsonProperty("msms_id")
     private int msmsId;
     private String hmdbId;
     private int voltage;

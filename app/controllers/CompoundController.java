@@ -172,8 +172,10 @@ public class CompoundController extends Controller {
                         break;
                     case "inchi":
                         existingCompound.setInchi(fieldValue.asText());
+                        break;
                     case "inchi_key":
                         existingCompound.setInchiKey(fieldValue.asText());
+                        break;
                     case "smiles":
                         existingCompound.setSmiles(fieldValue.asText());
                         break;

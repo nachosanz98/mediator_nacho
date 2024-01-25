@@ -56,7 +56,7 @@ package controllers {
     // @LINE:119
     def create(): Call = {
       
-      Call("POST", _prefix + { _defaultPrefix } + "compoundChain/")
+      Call("POST", _prefix + { _defaultPrefix } + "compoundChain")
     }
   
     // @LINE:121
@@ -67,14 +67,14 @@ package controllers {
   
   }
 
-  // @LINE:155
+  // @LINE:164
   class ReverseAssets(_prefix: => String) {
     def _defaultPrefix: String = {
       if (_prefix.endsWith("/")) "" else "/"
     }
 
   
-    // @LINE:155
+    // @LINE:164
     def versioned(file:Asset): Call = {
       implicit lazy val _rrc = new play.core.routing.ReverseRouteContext(Map(("path", "/public"))); _rrc
       Call("GET", _prefix + { _defaultPrefix } + "assets/" + implicitly[play.api.mvc.PathBindable[Asset]].unbind("file", file))
@@ -286,6 +286,57 @@ package controllers {
   
   }
 
+  // @LINE:155
+  class ReverseCompoundsGenController(_prefix: => String) {
+    def _defaultPrefix: String = {
+      if (_prefix.endsWith("/")) "" else "/"
+    }
+
+  
+    // @LINE:161
+    def patchCompoundsGen(id:Int): Call = {
+      
+      Call("PATCH", _prefix + { _defaultPrefix } + "compoundsGen/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Int]].unbind("id", id)))
+    }
+  
+    // @LINE:155
+    def listCompoundsGen(): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "compoundsGen/list")
+    }
+  
+    // @LINE:160
+    def delete(id:Int): Call = {
+      
+      Call("DELETE", _prefix + { _defaultPrefix } + "compoundsGen/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Int]].unbind("id", id)))
+    }
+  
+    // @LINE:159
+    def update(id:Int): Call = {
+      
+      Call("PUT", _prefix + { _defaultPrefix } + "compoundsGen/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Int]].unbind("id", id)))
+    }
+  
+    // @LINE:157
+    def retrieve(id:Int): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "compoundsGen/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Int]].unbind("id", id)))
+    }
+  
+    // @LINE:156
+    def listCompoundsGenInRange(startId:Int, endId:Int): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "compoundsGen" + play.core.routing.queryString(List(Some(implicitly[play.api.mvc.QueryStringBindable[Int]].unbind("startId", startId)), Some(implicitly[play.api.mvc.QueryStringBindable[Int]].unbind("endId", endId)))))
+    }
+  
+    // @LINE:158
+    def create(): Call = {
+      
+      Call("POST", _prefix + { _defaultPrefix } + "compoundsGen")
+    }
+  
+  }
+
   // @LINE:61
   class ReverseOntologyTermsController(_prefix: => String) {
     def _defaultPrefix: String = {
@@ -434,7 +485,7 @@ package controllers {
     // @LINE:129
     def create(): Call = {
       
-      Call("POST", _prefix + { _defaultPrefix } + "compoundClassyfire/")
+      Call("POST", _prefix + { _defaultPrefix } + "compoundClassyfire")
     }
   
     // @LINE:132
@@ -608,7 +659,7 @@ package controllers {
     // @LINE:139
     def create(): Call = {
       
-      Call("POST", _prefix + { _defaultPrefix } + "compoundOntology/")
+      Call("POST", _prefix + { _defaultPrefix } + "compoundOntology")
     }
   
     // @LINE:141
@@ -665,7 +716,7 @@ package controllers {
     // @LINE:149
     def create(): Call = {
       
-      Call("POST", _prefix + { _defaultPrefix } + "compoundPathways/")
+      Call("POST", _prefix + { _defaultPrefix } + "compoundPathways")
     }
   
     // @LINE:151
